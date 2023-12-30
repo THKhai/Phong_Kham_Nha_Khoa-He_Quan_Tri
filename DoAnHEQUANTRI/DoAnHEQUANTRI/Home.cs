@@ -49,5 +49,10 @@ namespace DoAnHEQUANTRI
             this.Hide();
             login.ShowDialog(this);
         }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
