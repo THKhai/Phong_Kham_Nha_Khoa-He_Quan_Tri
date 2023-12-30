@@ -30,3 +30,5 @@ G:\HeQuanTri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.csproj.Generate
 G:\HeQuanTri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.csproj.CoreCompileInputs.cache
 G:\HeQuanTri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.exe
 G:\HeQuanTri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.pdb
+G:\HeQuanTri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.DangKyLichHen.resources
+G:\HeQuanTri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeKhachHang.UpdateInfoBenhNhan.resources

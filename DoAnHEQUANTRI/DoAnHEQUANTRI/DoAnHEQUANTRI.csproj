@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PhanHeKhachHang\DangKyLH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\DangKyLH.designer.cs">
+      <DependentUpon>DangKyLH.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhanHeKhachHang\GiaoDienKH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,12 @@
     </Compile>
     <Compile Include="PhanHeKhachHang\LoginKH.Designer.cs">
       <DependentUpon>LoginKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\UpdateInfoBenhNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\UpdateInfoBenhNhan.Designer.cs">
+      <DependentUpon>UpdateInfoBenhNhan.cs</DependentUpon>
     </Compile>
     <Compile Include="PhanHeNhanVien\LoginNV.cs">
       <SubType>Form</SubType>
@@ -95,6 +107,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PhanHeKhachHang\DangKyLH.resx">
+      <DependentUpon>DangKyLH.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeKhachHang\GiaoDienKH.resx">
       <DependentUpon>GiaoDienKH.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeKhachHang\LoginKH.resx">
       <DependentUpon>LoginKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeKhachHang\UpdateInfoBenhNhan.resx">
+      <DependentUpon>UpdateInfoBenhNhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\LoginNV.resx">
       <DependentUpon>LoginNV.cs</DependentUpon>
