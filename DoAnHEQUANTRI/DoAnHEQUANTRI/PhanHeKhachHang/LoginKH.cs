@@ -39,16 +39,18 @@ namespace DoAnHEQUANTRI
                 _command = new SqlCommand(procname);
                 _command.CommandType = CommandType.StoredProcedure;
                 _command.Connection = _connection;
-                _command.Parameters.Add("@SDT", SqlDbType.NVarChar);
-                _command.Parameters.Add("@MATKHAU", SqlDbType.NVarChar);
+                _command.Parameters.Add("@SDT", SqlDbType.NVarChar,20);
+                _command.Parameters.Add("@MATKHAU", SqlDbType.NVarChar,255);
                 _command.Parameters.Add("@OK", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                _command.Parameters.Add("@MAKH", SqlDbType.NVarChar,20).Direction = ParameterDirection.Output;
                 _command.Parameters["@SDT"].Value = textBox1.Text;
                 _command.Parameters["@MATKHAU"].Value = textBox2.Text;
                 _command.ExecuteNonQuery();
                 bool ok = (bool)_command.Parameters["@OK"].Value;
+                string makh = _command.Parameters["@MAKH"].Value.ToString();
                 if (ok == true) 
                 { 
-                    GiaoDienKH test1 = new GiaoDienKH();
+                    GiaoDienKH test1 = new GiaoDienKH(makh);
                     MessageBox.Show("Đăng nhập thành công");
                     this.Hide();
                     test1.ShowDialog(this);

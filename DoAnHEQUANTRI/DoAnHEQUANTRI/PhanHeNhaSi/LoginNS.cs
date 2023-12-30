@@ -45,7 +45,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 bool ok = (bool)_command.Parameters["@OK"].Value;
                 if (ok == true)
                 {
-                    GiaoDienKH test1 = new GiaoDienKH();
+                   
                     MessageBox.Show("Đăng nhập thành công");
                     this.Hide();
                     // Thêm form giao diện khi đăng nhập thành công vào chỗ này
