@@ -103,6 +103,4 @@ CREATE TABLE QuanTriVien (
     HoTen NVARCHAR(255),
     MatKhau NVARCHAR(255)
 );
-insert into NhanVien values('1',N'Từ Phước Toàn','1234')
 
-Select * from KhachHang
