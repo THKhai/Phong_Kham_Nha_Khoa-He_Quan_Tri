@@ -1,7 +1,0 @@
-use QuanLyPhongKhamNhaKhoa_HQT
-go
-
-set transaction isolation level read uncommitted
-Begin Tran
-	select * from KhachHang
-commit tran
