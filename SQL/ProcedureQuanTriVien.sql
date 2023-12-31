@@ -109,3 +109,82 @@ BEGIN TRANSACTION
 	FROM Thuoc
 	WHERE NgayHetHan < GETDATE()
 COMMIT TRANSACTION
+go
+
+--dang ky tai khoan nhan vien
+
+CREATE OR ALTER PROCEDURE p_DangKyTKNV @MANV varchar(10), @HoTen NVARCHAR(255), @MatKhau NVARCHAR(255)
+AS
+BEGIN TRANSACTION
+	IF EXISTS (SELECT * FROM NhanVien WHERE MaNV = @MANV) 
+	BEGIN
+		RAISERROR(N'Mã Nhân viên đã tồn tại',14,1)
+		ROLLBACK
+	END
+	ELSE
+	BEGIN
+		INSERT INTO NhanVien VALUES (@MANV,@HoTen,@MatKhau) 
+	END
+		--WAITFOR DELAY '00:00:10'
+	BEGIN
+		COMMIT TRANSACTION
+	END
+--dang ky tai khoan nha si
+GO
+CREATE OR ALTER PROCEDURE p_DangKyTKNS @MANS varchar(10), @HoTen NVARCHAR(255), @SoDienThoai NVARCHAR(20), @MatKhau NVARCHAR(255), @Lichlam NVARCHAR(MAX), @Ban BIT
+AS
+BEGIN TRANSACTION
+	IF EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MANS) 
+	BEGIN
+		RAISERROR(N'Mã Nha sĩ đã tồn tại',14,1)
+		ROLLBACK
+	END
+	ELSE
+	BEGIN
+		INSERT INTO NhaSi(MaNhaSi, HoTen, SoDienThoai, MatKhau, Ban) VALUES (@MANS,@HoTen,@SoDienThoai,@MatKhau,0) 
+	END
+	BEGIN
+		COMMIT TRANSACTION
+	END
+
+--khoa tai khoan nhan vien
+
+-- khoa tai khoan nha si
+GO
+CREATE OR ALTER PROCEDURE p_BanTKNS @MANS varchar(10)
+AS
+BEGIN TRANSACTION
+	IF NOT EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MANS) 
+	BEGIN
+		RAISERROR(N'Mã Nha sĩ không tồn tại',14,1)
+		ROLLBACK
+	END
+	ELSE
+	BEGIN
+		UPDATE NhaSi
+		SET Ban = 1
+		WHERE MaNhaSi = @MANS
+	END
+	BEGIN
+		COMMIT TRANSACTION
+	END
+
+--khoa tai khoan khach hang
+GO
+CREATE OR ALTER PROCEDURE p_BanTKKH @MAKH varchar(10)
+AS
+BEGIN TRANSACTION
+	IF NOT EXISTS (SELECT * FROM KhachHang WHERE MaBN = @MAKH) 
+	BEGIN
+		RAISERROR(N'Mã Khách hàng không tồn tại',14,1)
+		ROLLBACK
+	END
+	ELSE
+	BEGIN
+		UPDATE KhachHang
+		SET Ban = 1
+		WHERE MaBN = @MAKH
+	END
+	BEGIN
+		COMMIT TRANSACTION
+	END
