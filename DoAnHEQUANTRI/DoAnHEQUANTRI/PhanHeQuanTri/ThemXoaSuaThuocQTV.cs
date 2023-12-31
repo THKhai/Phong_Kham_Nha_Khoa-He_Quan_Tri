@@ -29,17 +29,26 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //them
+            var form = new ThemThuocQTV();
+            form.Show();
+            Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            //xoa
+            var form = new XoaThuocQTV();
+            form.Show();
+            Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            //sua
+            var form = new SuaThuocQTV();
+            form.Show();
+            Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)

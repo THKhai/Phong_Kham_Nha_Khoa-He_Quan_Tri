@@ -124,6 +124,18 @@
     <Compile Include="PhanHeQuanTri\QuanLyThuocQTV.Designer.cs">
       <DependentUpon>QuanLyThuocQTV.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhanHeQuanTri\SuaThuocQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\SuaThuocQTV.Designer.cs">
+      <DependentUpon>SuaThuocQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\ThemThuocQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\ThemThuocQTV.Designer.cs">
+      <DependentUpon>ThemThuocQTV.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhanHeQuanTri\ThemXoaSuaThuocQTV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +147,18 @@
     </Compile>
     <Compile Include="PhanHeQuanTri\XemDMThuoc.Designer.cs">
       <DependentUpon>XemDMThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XemThuocDaHetHanQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XemThuocDaHetHanQTV.Designer.cs">
+      <DependentUpon>XemThuocDaHetHanQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XoaThuocQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XoaThuocQTV.Designer.cs">
+      <DependentUpon>XoaThuocQTV.cs</DependentUpon>
     </Compile>
     <Compile Include="QuanLyPhongKhamNhaKhoa_HQTDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -179,11 +203,23 @@
     <EmbeddedResource Include="PhanHeQuanTri\QuanLyThuocQTV.resx">
       <DependentUpon>QuanLyThuocQTV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\SuaThuocQTV.resx">
+      <DependentUpon>SuaThuocQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\ThemThuocQTV.resx">
+      <DependentUpon>ThemThuocQTV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeQuanTri\ThemXoaSuaThuocQTV.resx">
       <DependentUpon>ThemXoaSuaThuocQTV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeQuanTri\XemDMThuoc.resx">
       <DependentUpon>XemDMThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\XemThuocDaHetHanQTV.resx">
+      <DependentUpon>XemThuocDaHetHanQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\XoaThuocQTV.resx">
+      <DependentUpon>XoaThuocQTV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
