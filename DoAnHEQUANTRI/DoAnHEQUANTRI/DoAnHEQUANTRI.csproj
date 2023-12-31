@@ -136,12 +136,6 @@
     <Compile Include="PhanHeNhanVien\TinhTienNV.Designer.cs">
       <DependentUpon>TinhTienNV.cs</DependentUpon>
     </Compile>
-    <Compile Include="PhanHeNhanVien\XemDMNV.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PhanHeNhanVien\XemDMNV.Designer.cs">
-      <DependentUpon>XemDMNV.cs</DependentUpon>
-    </Compile>
     <Compile Include="PhanHeNhanVien\XoaNV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,11 +248,17 @@
     <EmbeddedResource Include="PhanHeNhanVien\MenuNV.resx">
       <DependentUpon>MenuNV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\SuaNV.resx">
+      <DependentUpon>SuaNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\ThemNV.resx">
       <DependentUpon>ThemNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\ThemXoaSuaNV.resx">
       <DependentUpon>ThemXoaSuaNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\XoaNV.resx">
+      <DependentUpon>XoaNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\GiaoDien_NhaSi.resx">
       <DependentUpon>GiaoDien_NhaSi.cs</DependentUpon>

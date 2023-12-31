@@ -24,13 +24,6 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
             Hide();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var form = new XemDMNV();
-            form.Show();
-            Hide();
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             var form = new MenuNV();
