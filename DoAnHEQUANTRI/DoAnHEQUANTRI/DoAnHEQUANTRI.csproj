@@ -88,6 +88,12 @@
     <Compile Include="PhanHeNhanVien\LoginNV.Designer.cs">
       <DependentUpon>LoginNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhanHeNhaSi\GiaoDien_NhaSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\GiaoDien_NhaSi.Designer.cs">
+      <DependentUpon>GiaoDien_NhaSi.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhanHeNhaSi\LoginNS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\LoginNV.resx">
       <DependentUpon>LoginNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\GiaoDien_NhaSi.resx">
+      <DependentUpon>GiaoDien_NhaSi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\LoginNS.resx">
       <DependentUpon>LoginNS.cs</DependentUpon>

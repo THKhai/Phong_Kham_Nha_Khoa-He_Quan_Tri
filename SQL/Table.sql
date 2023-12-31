@@ -103,4 +103,3 @@ CREATE TABLE QuanTriVien (
     HoTen NVARCHAR(255),
     MatKhau NVARCHAR(255)
 );
-

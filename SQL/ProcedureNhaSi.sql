@@ -1,5 +1,6 @@
 ﻿use QuanLyPhongKhamNhaKhoa_HQT
-go
+go	
+
 CREATE OR ALTER PROCEDURE p_KtraTKNS @MANS VARCHAR(20), @MATKHAU NVARCHAR(255),
 @OK BIT OUT
 AS
@@ -13,3 +14,5 @@ BEGIN TRANSACTION
 	SET @OK = 0
 	END
 COMMIT TRANSACTION
+
+create or alter procedure 
