@@ -14,3 +14,36 @@ BEGIN TRANSACTION
 	SET @OK = 0
 	END
 COMMIT TRANSACTION
+--Xem danh muc thuoc
+go
+CREATE OR ALTER PROCEDURE p_Xemdanhmucthuoc
+AS
+BEGIN TRANSACTION
+	SELECT *
+	FROM Thuoc
+COMMIT TRANSACTION
+--
+go
+CREATE OR ALTER PROCEDURE p_ThemThuoc
+	@MaThuoc VARCHAR(10),
+	@TenThuoc NVARCHAR(255),
+	DonViTinh NVARCHAR(50),
+    ChiDinh NVARCHAR(MAX),
+    SoLuongTon INT,
+    NgayHetHan DATE,
+	Delay DATETIME,
+	@OK BIT OUT
+AS
+BEGIN TRANSACTION
+	IF EXISTS(SELECT * FROM Thuoc WHERE @MaThuoc = Thuoc.MaThuoc)
+	BEGIN
+		SET @OK = 0
+
+	END
+	ELSE
+	BEGIN
+		SET @OK = 1
+		INSERT INTO Thuoc(MaThuoc, TenThuoc, DonViTinh, ChiDinh, SoLuongTon, NgayHetHan)
+		VALUE (@MaThuoc, @TenThuoc, @DonViTinh, @ChiDinh, @SoLuongTon, @NgayHetHan)
+	END
+COMMIT TRANSACTION

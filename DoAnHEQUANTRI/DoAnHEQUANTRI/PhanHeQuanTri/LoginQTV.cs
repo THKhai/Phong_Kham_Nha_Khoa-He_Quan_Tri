@@ -20,8 +20,8 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
         public LoginQTV()
         {
             InitializeComponent();
-            _connectionString = @"Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
-
+            //_connectionString = @"Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=DESKTOP-OB2NBQU;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
         }
 
         private void Dangnhap_Click(object sender, EventArgs e)
@@ -48,7 +48,8 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
                     this.Hide();
                     // Thêm form giao diện khi đăng nhập thành công vào chỗ này
                     //test1.ShowDialog(this);
-
+                    var form = new MenuQTV();
+                    form.Show();
                     textBox1.Text = "";
                     textBox2.Text = "";
 
