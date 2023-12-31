@@ -114,6 +114,7 @@ BEGIN TRAN
 	UPDATE KhachHang 
 	SET HoTen = @HOTEN, NgaySinh = @NGAYSINH, DiaChi = @DIACHI, SoDienThoai = @SODIENTHOAI, MatKhau = @MATKHAU
 	WHERE KhachHang.MaBN = @MABN
+	 --WAITFOR DELAY '00:00:10'
 	IF EXISTS (SELECT * FROM KhachHang WHERE KhachHang.MaBN <> @MABN AND KhachHang.SoDienThoai = @SODIENTHOAI)
 	BEGIN
 		RAISERROR(N'Số điện thoại trên đã được đăng ký',14,1)
