@@ -150,18 +150,41 @@ end
 go
 
 -- Tạo Đơn Thuốc
-create or alter procedure ThemDonThuoc @DonTHuoc varchar(10), @MaThuoc varchar(10)
+create or alter procedure ThemDonThuoc 
+    @DonTHuoc varchar(10), 
+    @MaThuoc varchar(10),
+    @SoLuong int
 as
 begin transaction
-		if ( not exists (select* from DonThuoc t where t.DonThuoc = @DonTHuoc and t.MaThuoc = @MaThuoc))
-		begin
-			insert DonThuoc(DonThuoc,MaThuoc) values (@DonTHuoc,@MaThuoc)
-		end
-		else
-		begin
-			raiserror (N' Đã Tồn tại đơn thuốc này',14,1)
-		end
+    if (not exists (select * from DonThuoc t where t.DonThuoc = @DonTHuoc and t.MaThuoc = @MaThuoc))
+    begin
+        -- Sử dụng COLLATE để so sánh không phân biệt chữ hoa/chữ thường
+        insert DonThuoc(DonThuoc, MaThuoc, Soluong) values (@DonTHuoc, @MaThuoc, @SoLuong)
+    end
+    else
+    begin
+        raiserror (N'Đã tồn tại đơn thuốc này', 14, 1)
+    end
 commit transaction
+
 select*
 from HoSoBenhNhan hsbn
 where hsbn.DonThuoc = '10' and hsbn.MaBN = '03' 
+
+-- Cap Số Lượng  Thuốc Tồn kho
+go
+create or alter procedure CapNhat_SoLuong_Thuoc 
+    @MaThuoc varchar(10), 
+    @SoLuong int
+as
+begin transaction
+    if ((select t.SoLuongTon from Thuoc t where t.MaThuoc = @MaThuoc) >= @SoLuong)
+    begin
+        update Thuoc set SoLuongTon = SoLuongTon - @SoLuong where MaThuoc = @MaThuoc;
+    end
+    else    begin
+        raiserror (N'Không Đủ Số Lượng Thuốc', 14, 1);
+    end
+commit transaction;
+
+

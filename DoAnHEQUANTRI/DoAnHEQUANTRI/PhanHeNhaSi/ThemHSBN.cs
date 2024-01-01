@@ -122,11 +122,6 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            phi = ((float)numericUpDown1.Value);
-        }
-
         private void ThemHSBN_Load(object sender, EventArgs e)
         {
             Label_MaBN.Text =current_MaBN;
@@ -139,28 +134,47 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void addHSBN()
         {
-            using (_connection = new SqlConnection(_connectionString))
+            try
             {
-                using (SqlCommand command = new SqlCommand("Them_HSBN", _connection))
+                using (_connection = new SqlConnection(_connectionString))
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@MaBN", SqlDbType.VarChar, 10).Value = current_MaBN;
-                    command.Parameters.Add("@STT", SqlDbType.Int).Value =STT;
-                    command.Parameters.Add("@Ngay_Kham", SqlDbType.Date).Value = NgayKham;
-                    command.Parameters.Add("@MaNhaSi", SqlDbType.VarChar, 10).Value = MaNhasSi;
-                    command.Parameters.Add("@PhiKham", SqlDbType.VarChar, 10).Value = phi;
-                    command.Parameters.Add("@DichVu", SqlDbType.VarChar, 255).Value = Dich_Vu;
-                    command.Parameters.Add("@DonThuoc", SqlDbType.VarChar, 255).Value = MaDT;
+                    using (SqlCommand command = new SqlCommand("Them_HSBN", _connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@MaBN", SqlDbType.VarChar, 10).Value = current_MaBN;
+                        command.Parameters.Add("@STT", SqlDbType.Int).Value = STT;
+                        command.Parameters.Add("@Ngay_Kham", SqlDbType.Date).Value = NgayKham;
+                        command.Parameters.Add("@MaNhaSi", SqlDbType.VarChar, 10).Value = MaNhasSi;
+                        command.Parameters.Add("@PhiKham", SqlDbType.VarChar, 10).Value = phi;
+                        command.Parameters.Add("@DichVu", SqlDbType.VarChar, 255).Value = Dich_Vu;
+                        command.Parameters.Add("@DonThuoc", SqlDbType.VarChar, 255).Value = MaDT;
 
-                    _connection.Open();
-                    command.ExecuteNonQuery();
+                        _connection.Open();
+                        command.ExecuteNonQuery();
 
-                    // Retrieve the output parameter value after executing the stored procedure
+                        // Retrieve the output parameter value after executing the stored procedure
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Xử lý lỗi từ thủ tục SQL
+                foreach (SqlError error in ex.Errors)
+                {
+                    Console.WriteLine($"Error {error.Number}: {error.Message}");
+                }
 
+                // Bạn có thể thêm mã để quay lại trạng thái trước khi lỗi xảy ra hoặc thực hiện các hành động xử lý lỗi khác tại đây.
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
                     _connection.Close();
                 }
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             addHSBN();
