@@ -1,6 +1,6 @@
 ﻿namespace DoAnHEQUANTRI.PhanHeQuanTri
 {
-    partial class QuanLyNguoiDungQTV
+    partial class DKTKMoiQTV
     {
         /// <summary>
         /// Required designer variable.
@@ -35,35 +35,35 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(36, 25);
+            this.button3.Location = new System.Drawing.Point(30, 39);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(93, 49);
-            this.button3.TabIndex = 8;
+            this.button3.TabIndex = 11;
             this.button3.Text = "Quay về";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(236, 206);
+            this.button2.Location = new System.Drawing.Point(230, 220);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(305, 61);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Khóa/Mở khóa tài khoản";
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Đăng ký tài khoản Nha sĩ mới";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(236, 139);
+            this.button1.Location = new System.Drawing.Point(230, 153);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(305, 61);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Đăng ký tài khoản mới";
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Đăng ký tài khoản Nhân Viên mới";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // QuanLyNguoiDungQTV
+            // DKTKMoiQTV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,8 +71,8 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "QuanLyNguoiDungQTV";
-            this.Text = "QuanLyNguoiDungQTV";
+            this.Name = "DKTKMoiQTV";
+            this.Text = "DKTKMoiQTV";
             this.ResumeLayout(false);
 
         }

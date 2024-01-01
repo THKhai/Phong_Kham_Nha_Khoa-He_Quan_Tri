@@ -16,5 +16,27 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new DKTKMoiQTV();
+            form.Show();
+            Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var form = new KhoaTKQTV();
+            form.Show();
+            Hide();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var form = new MenuQTV();
+            form.Show();
+            this.Close();
+        }
     }
 }

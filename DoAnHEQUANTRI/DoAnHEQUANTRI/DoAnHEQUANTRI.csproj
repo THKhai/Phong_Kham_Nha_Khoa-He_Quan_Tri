@@ -160,6 +160,54 @@
     <Compile Include="PhanHeNhaSi\LoginNS.Designer.cs">
       <DependentUpon>LoginNS.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKMoiQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKMoiQTV.Designer.cs">
+      <DependentUpon>DKTKMoiQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKNSMoiQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKNSMoiQTV.Designer.cs">
+      <DependentUpon>DKTKNSMoiQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKNVMoiQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKNVMoiQTV.Designer.cs">
+      <DependentUpon>DKTKNVMoiQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKKHFinalQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKKHFinalQTV.Designer.cs">
+      <DependentUpon>KhoaTKKHFinalQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKKHQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKKHQTV.Designer.cs">
+      <DependentUpon>KhoaTKKHQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKNSFinalQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKNSFinalQTV.Designer.cs">
+      <DependentUpon>KhoaTKNSFinalQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKNSQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKNSQTV.Designer.cs">
+      <DependentUpon>KhoaTKNSQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKQTV.Designer.cs">
+      <DependentUpon>KhoaTKQTV.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhanHeQuanTri\LoginQTV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +219,18 @@
     </Compile>
     <Compile Include="PhanHeQuanTri\MenuQTV.Designer.cs">
       <DependentUpon>MenuQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MokhoaTKKHFinalQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MokhoaTKKHFinalQTV.Designer.cs">
+      <DependentUpon>MokhoaTKKHFinalQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MokhoaTKNSFinalQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MokhoaTKNSFinalQTV.Designer.cs">
+      <DependentUpon>MokhoaTKNSFinalQTV.cs</DependentUpon>
     </Compile>
     <Compile Include="PhanHeQuanTri\QuanLyNguoiDungQTV.cs">
       <SubType>Form</SubType>
@@ -266,11 +326,44 @@
     <EmbeddedResource Include="PhanHeNhaSi\LoginNS.resx">
       <DependentUpon>LoginNS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\DKTKMoiQTV.resx">
+      <DependentUpon>DKTKMoiQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\DKTKNSMoiQTV.resx">
+      <DependentUpon>DKTKNSMoiQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\DKTKNVMoiQTV.resx">
+      <DependentUpon>DKTKNVMoiQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKKHFinalQTV.resx">
+      <DependentUpon>KhoaTKKHFinalQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKKHQTV.resx">
+      <DependentUpon>KhoaTKKHQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKNSFinalQTV.resx">
+      <DependentUpon>KhoaTKNSFinalQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKNSQTV.resx">
+      <DependentUpon>KhoaTKNSQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKQTV.resx">
+      <DependentUpon>KhoaTKQTV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeQuanTri\LoginQTV.resx">
       <DependentUpon>LoginQTV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeQuanTri\MenuQTV.resx">
       <DependentUpon>MenuQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\MokhoaTKKHFinalQTV.resx">
+      <DependentUpon>MokhoaTKKHFinalQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\MokhoaTKNSFinalQTV.resx">
+      <DependentUpon>MokhoaTKNSFinalQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\QuanLyNguoiDungQTV.resx">
+      <DependentUpon>QuanLyNguoiDungQTV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeQuanTri\QuanLyThuocQTV.resx">
       <DependentUpon>QuanLyThuocQTV.cs</DependentUpon>

@@ -11,15 +11,15 @@ using System.Windows.Forms;
 
 namespace DoAnHEQUANTRI.PhanHeQuanTri
 {
-    public partial class ThemXoaSuaThuocQTV : Form
+    public partial class KhoaTKKHQTV : Form
     {
-        public ThemXoaSuaThuocQTV()
+        public KhoaTKKHQTV()
         {
             InitializeComponent();
             DataTable dt = new DataTable();
             SqlConnection myConn = new SqlConnection("Data Source=DESKTOP-OB2NBQU;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True");
             myConn.Open();
-            SqlCommand myCmd = new SqlCommand("p_Xemdanhmucthuoc", myConn);
+            SqlCommand myCmd = new SqlCommand("p_DanhsachTKKHdaban", myConn);
             myCmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(myCmd);
             da.Fill(dt);
@@ -29,31 +29,21 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //them
-            var form = new ThemThuocQTV();
+            var form = new KhoaTKKHFinalQTV();
             form.Show();
             Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //xoa
-            var form = new XoaThuocQTV();
-            form.Show();
-            Hide();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //sua
-            var form = new SuaThuocQTV();
+            var form = new MokhoaTKKHFinalQTV();
             form.Show();
             Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var form = new QuanLyThuocQTV();
+            var form = new KhoaTKQTV();
             form.Show();
             this.Close();
         }

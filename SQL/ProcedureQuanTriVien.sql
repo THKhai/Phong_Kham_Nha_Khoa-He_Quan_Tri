@@ -14,7 +14,7 @@ BEGIN TRANSACTION
 	SET @OK = 0
 	END
 COMMIT TRANSACTION
---Xem danh muc thuoc
+--XEM DANH MUC THUOC
 go
 CREATE OR ALTER PROCEDURE p_Xemdanhmucthuoc
 AS
@@ -34,15 +34,17 @@ CREATE OR ALTER PROCEDURE p_ThemThuoc
 	@Delay TIME
 AS
 BEGIN TRANSACTION
-	INSERT INTO Thuoc(MaThuoc, TenThuoc, DonViTinh, ChiDinh, SoLuongTon, NgayHetHan)
-	VALUES (@MaThuoc, @TenThuoc, @DonViTinh, @ChiDinh, @SoLuongTon, @NgayHetHan);
-	--WAITFOR DELAY '00:00:10'
 	IF EXISTS(SELECT * FROM Thuoc WHERE @MaThuoc = MaThuoc)
 	BEGIN
 		RAISERROR(N'Mã thuốc đã tồn tại',14,1)
 		ROLLBACK
 	END
 	ElSE
+	BEGIN
+		INSERT INTO Thuoc(MaThuoc, TenThuoc, DonViTinh, ChiDinh, SoLuongTon, NgayHetHan)
+		VALUES (@MaThuoc, @TenThuoc, @DonViTinh, @ChiDinh, @SoLuongTon, @NgayHetHan);
+		--WAITFOR DELAY '00:00:10'
+	END
 	BEGIN
 		COMMIT TRANSACTION
 	END
@@ -113,35 +115,36 @@ go
 
 --dang ky tai khoan nhan vien
 
-CREATE OR ALTER PROCEDURE p_DangKyTKNV @MANV varchar(10), @HoTen NVARCHAR(255), @MatKhau NVARCHAR(255)
+CREATE OR ALTER PROCEDURE p_DangKyTKNV @MaNV varchar(10), @HoTen NVARCHAR(255), @MatKhau NVARCHAR(255)
 AS
 BEGIN TRANSACTION
-	IF EXISTS (SELECT * FROM NhanVien WHERE MaNV = @MANV) 
+	IF EXISTS (SELECT * FROM NhanVien WHERE MaNV = @MaNV) 
 	BEGIN
 		RAISERROR(N'Mã Nhân viên đã tồn tại',14,1)
 		ROLLBACK
 	END
 	ELSE
 	BEGIN
-		INSERT INTO NhanVien VALUES (@MANV,@HoTen,@MatKhau) 
+		INSERT INTO NhanVien VALUES (@MaNV,@HoTen,@MatKhau) 
 	END
 		--WAITFOR DELAY '00:00:10'
 	BEGIN
 		COMMIT TRANSACTION
 	END
 --dang ky tai khoan nha si
+--, @Lichlam NVARCHAR(MAX)
 GO
-CREATE OR ALTER PROCEDURE p_DangKyTKNS @MANS varchar(10), @HoTen NVARCHAR(255), @SoDienThoai NVARCHAR(20), @MatKhau NVARCHAR(255), @Lichlam NVARCHAR(MAX), @Ban BIT
+CREATE OR ALTER PROCEDURE p_DangKyTKNS @MaNS varchar(10), @HoTen NVARCHAR(255), @SoDienThoai NVARCHAR(20), @MatKhau NVARCHAR(255), @Ban BIT
 AS
 BEGIN TRANSACTION
-	IF EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MANS) 
+	IF EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MaNS) 
 	BEGIN
 		RAISERROR(N'Mã Nha sĩ đã tồn tại',14,1)
 		ROLLBACK
 	END
 	ELSE
 	BEGIN
-		INSERT INTO NhaSi(MaNhaSi, HoTen, SoDienThoai, MatKhau, Ban) VALUES (@MANS,@HoTen,@SoDienThoai,@MatKhau,0) 
+		INSERT INTO NhaSi(MaNhaSi, HoTen, SoDienThoai, MatKhau, Ban) VALUES (@MaNS,@HoTen,@SoDienThoai,@MatKhau,0) 
 	END
 	BEGIN
 		COMMIT TRANSACTION
@@ -149,21 +152,46 @@ BEGIN TRANSACTION
 
 --khoa tai khoan nhan vien
 
--- khoa tai khoan nha si
-GO
-CREATE OR ALTER PROCEDURE p_BanTKNS @MANS varchar(10)
+--danh sach tai khoan nha si da ban
+go
+CREATE OR ALTER PROCEDURE p_DanhsachTKNSdaban
 AS
 BEGIN TRANSACTION
-	IF NOT EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MANS) 
+	SELECT *
+	FROM NhaSi
+	WHERE Ban = 1
+COMMIT TRANSACTION
+---danh sach tai khoan khach hang da ban 
+go
+CREATE OR ALTER PROCEDURE p_DanhsachTKKHdaban
+AS
+BEGIN TRANSACTION
+	SELECT *
+	FROM KhachHang
+	WHERE Ban = 1
+COMMIT TRANSACTION
+-- khoa tai khoan nha si
+
+GO
+CREATE OR ALTER PROCEDURE p_BanTKNS @MaNS varchar(10)
+AS
+BEGIN TRANSACTION
+	IF NOT EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MaNS) 
 	BEGIN
 		RAISERROR(N'Mã Nha sĩ không tồn tại',14,1)
+		ROLLBACK
+	END
+	ELSE
+	IF EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MaNS AND Ban = 1)
+	BEGIN
+		RAISERROR(N'Tài khản Nha sĩ đã bị khóa rồi',14,1)
 		ROLLBACK
 	END
 	ELSE
 	BEGIN
 		UPDATE NhaSi
 		SET Ban = 1
-		WHERE MaNhaSi = @MANS
+		WHERE MaNhaSi = @MaNS
 	END
 	BEGIN
 		COMMIT TRANSACTION
@@ -180,6 +208,12 @@ BEGIN TRANSACTION
 		ROLLBACK
 	END
 	ELSE
+	IF EXISTS (SELECT * FROM KhachHang WHERE MaBN = @MAKH AND Ban = 1)
+	BEGIN
+		RAISERROR(N'Tài khoản Khách hàng đã bị khóa rồi',14,1)
+		ROLLBACK
+	END
+	ELSE
 	BEGIN
 		UPDATE KhachHang
 		SET Ban = 1
@@ -188,3 +222,63 @@ BEGIN TRANSACTION
 	BEGIN
 		COMMIT TRANSACTION
 	END
+
+--mo khoa tai khoan nha si
+GO
+CREATE OR ALTER PROCEDURE p_UnbanTKNS @MaNS varchar(10)
+AS
+BEGIN TRANSACTION
+	IF NOT EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MaNS) 
+	BEGIN
+		RAISERROR(N'Mã Nha sĩ không tồn tại',14,1)
+		ROLLBACK
+	END
+	ELSE
+	IF NOT EXISTS (SELECT * FROM NhaSi WHERE MaNhaSi = @MaNS AND Ban = 1)
+	BEGIN
+		RAISERROR(N'Tài khoản Nha sĩ không bị khóa!!!',14,1)
+		ROLLBACK
+	END
+	ELSE
+	BEGIN
+		UPDATE NhaSi
+		SET Ban = 0
+		WHERE MaNhaSi = @MaNS
+	END
+	BEGIN
+		COMMIT TRANSACTION
+	END
+
+--mo khoa tai khoan khach hang
+GO
+CREATE OR ALTER PROCEDURE p_UnbanTKKH @MaKH varchar(10)
+AS
+BEGIN TRANSACTION
+	IF NOT EXISTS (SELECT * FROM KhachHang WHERE MaBN = @MaKH) 
+	BEGIN
+		RAISERROR(N'Mã Khách hàng không tồn tại',14,1)
+		ROLLBACK
+	END
+	ELSE
+	IF NOT EXISTS (SELECT * FROM KhachHang WHERE MaBN = @MaKH AND Ban = 1)
+	BEGIN
+		RAISERROR(N'Tài khoản Khách hàng không bị khóa!!!',14,1)
+		ROLLBACK
+	END
+	ELSE
+	BEGIN
+		UPDATE KhachHang
+		SET Ban = 0
+		WHERE MaBN = @MaKH
+	END
+	BEGIN
+		COMMIT TRANSACTION
+	END
+
+/*DKTKMoiQTV
+DKTKNVMoiQTV
+DKTKNSMoiQTV
+
+KhoaTKQTV
+KhoaTKNSQTV
+KhoaTKKHQTV*/

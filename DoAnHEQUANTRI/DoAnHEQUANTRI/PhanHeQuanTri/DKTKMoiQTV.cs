@@ -10,30 +10,30 @@ using System.Windows.Forms;
 
 namespace DoAnHEQUANTRI.PhanHeQuanTri
 {
-    public partial class QuanLyThuocQTV : Form
+    public partial class DKTKMoiQTV : Form
     {
-        public QuanLyThuocQTV()
+        public DKTKMoiQTV()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var form = new ThemXoaSuaThuocQTV();
+            var form = new DKTKNVMoiQTV();
             form.Show();
             Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var form = new XemDMThuoc();
+            var form = new DKTKNSMoiQTV();
             form.Show();
             Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var form = new MenuQTV();
+            var form = new QuanLyNguoiDungQTV();
             form.Show();
             this.Close();
         }
