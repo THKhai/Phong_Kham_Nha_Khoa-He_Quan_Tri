@@ -37,13 +37,16 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
                     _connection = new SqlConnection(_connectionString);
                     _connection.Open();
                     String procname = "p_UnbanTKNS";
-                    _command.Parameters.Add("@MaNS", SqlDbType.VarChar);
                     _command = new SqlCommand(procname);
                     _command.CommandType = CommandType.StoredProcedure;
                     _command.Connection = _connection;
+                    _command.Parameters.Add("@MaNS", SqlDbType.VarChar);
+
                     _command.Parameters["@MaNS"].Value = textBox1.Text;
                     _command.ExecuteNonQuery();
                     MessageBox.Show("Mở khóa tài khoản thành công");
+                    var form = new KhoaTKNSQTV();
+                    form.Show();
                     this.Close();
                 }
             }

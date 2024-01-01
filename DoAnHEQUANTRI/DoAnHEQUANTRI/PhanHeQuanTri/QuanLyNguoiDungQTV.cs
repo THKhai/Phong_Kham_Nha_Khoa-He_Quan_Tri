@@ -26,7 +26,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var form = new DKTKMoiQTV();
+            var form = new KhoaTKQTV();
             form.Show();
             Hide();
 

@@ -36,20 +36,23 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
                 {
                     _connection = new SqlConnection(_connectionString);
                     _connection.Open();
-                    String procname = "p_DangKyTKKH";
-                    _command.Parameters.Add("@MaKH", SqlDbType.VarChar);
-                    _command.Parameters.Add("@HoTen", SqlDbType.NVarChar);
-                    _command.Parameters.Add("@SoDienThoai", SqlDbType.NVarChar);
-                    _command.Parameters.Add("@MatKhau", SqlDbType.NVarChar);
+                    String procname = "p_DangKyTKNS";
                     _command = new SqlCommand(procname);
                     _command.CommandType = CommandType.StoredProcedure;
                     _command.Connection = _connection;
-                    _command.Parameters["@MaNV"].Value = textBox1.Text;
+                    _command.Parameters.Add("@MaNS", SqlDbType.VarChar);
+                    _command.Parameters.Add("@HoTen", SqlDbType.NVarChar);
+                    _command.Parameters.Add("@SoDienThoai", SqlDbType.NVarChar);
+                    _command.Parameters.Add("@MatKhau", SqlDbType.NVarChar);
+
+                    _command.Parameters["@MaNS"].Value = textBox1.Text;
                     _command.Parameters["@HoTen"].Value = textBox2.Text;
                     _command.Parameters["@SoDienThoai"].Value = textBox3.Text;
                     _command.Parameters["@MatKhau"].Value = textBox4.Text;
                     _command.ExecuteNonQuery();
                     MessageBox.Show("Đăng ký tài khoản thành công");
+                    var form = new DKTKMoiQTV();
+                    form.Show();
                     this.Close();
                 }
             }
