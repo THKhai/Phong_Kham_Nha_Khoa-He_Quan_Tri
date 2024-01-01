@@ -181,7 +181,6 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
             DanhSachThuoc dst = new DanhSachThuoc(STT,current_MaBN,MaDT);
             this.Hide();
             dst.ShowDialog();
-            this.Show();
         }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {

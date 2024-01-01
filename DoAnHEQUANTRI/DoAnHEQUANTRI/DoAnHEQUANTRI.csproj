@@ -148,6 +148,12 @@
     <Compile Include="PhanHeNhanVien\XoaNV.Designer.cs">
       <DependentUpon>XoaNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhanHeNhaSi\CS_HSBN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\CS_HSBN.Designer.cs">
+      <DependentUpon>CS_HSBN.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhanHeNhaSi\DanSachThuoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,12 @@
     </Compile>
     <Compile Include="PhanHeNhaSi\LoginNS.Designer.cs">
       <DependentUpon>LoginNS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\ThemCuocHen_NhaSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\ThemCuocHen_NhaSi.Designer.cs">
+      <DependentUpon>ThemCuocHen_NhaSi.cs</DependentUpon>
     </Compile>
     <Compile Include="PhanHeNhaSi\ThemHSBN.cs">
       <SubType>Form</SubType>
@@ -332,6 +344,9 @@
     <EmbeddedResource Include="PhanHeNhanVien\ThemXoaSuaNV.resx">
       <DependentUpon>ThemXoaSuaNV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\CS_HSBN.resx">
+      <DependentUpon>CS_HSBN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\DanSachThuoc.resx">
       <DependentUpon>DanSachThuoc.cs</DependentUpon>
     </EmbeddedResource>
@@ -340,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\LoginNS.resx">
       <DependentUpon>LoginNS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\ThemCuocHen_NhaSi.resx">
+      <DependentUpon>ThemCuocHen_NhaSi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\ThemHSBN.resx">
       <DependentUpon>ThemHSBN.cs</DependentUpon>

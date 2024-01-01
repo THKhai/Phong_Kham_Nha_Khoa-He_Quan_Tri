@@ -163,6 +163,7 @@
             this.ChinhSua.TabIndex = 13;
             this.ChinhSua.Text = "Chỉnh Sửa";
             this.ChinhSua.UseVisualStyleBackColor = true;
+            this.ChinhSua.Click += new System.EventHandler(this.ChinhSua_Click);
             // 
             // Đang_Xuat
             // 

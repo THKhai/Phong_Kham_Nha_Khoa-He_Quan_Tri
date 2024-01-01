@@ -211,7 +211,10 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         }
 
 
+        private void tinhphi()
+        {
 
+        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             find_medicin();
@@ -224,12 +227,24 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            int soLuong = (int)numericUpDown1.Value;
+            soluong = (int)numericUpDown1.Value;
 
         }
 
         private void end_Click(object sender, EventArgs e)
         {
+            using (_connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("Tinh_Phi", _connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@MaBN", current_mabn);
+                    command.Parameters.AddWithValue("@STT", stt);
+                    _connection.Open();
+                    command.ExecuteNonQuery();
+
+                }
+            }
             this.Close();
         }
     }
