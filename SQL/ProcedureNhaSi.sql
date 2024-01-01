@@ -151,21 +151,30 @@ go
 
 -- Tạo Đơn Thuốc
 create or alter procedure ThemDonThuoc 
-    @DonTHuoc varchar(10), 
+    @DonThuoc varchar(10), 
     @MaThuoc varchar(10),
-    @SoLuong int
+	@SoLuong int,
+    @ErrorOccurred bit output
 as
-begin transaction
-    if (not exists (select * from DonThuoc t where t.DonThuoc = @DonTHuoc and t.MaThuoc = @MaThuoc))
+begin
+    begin transaction
+
+    set @ErrorOccurred = 0; -- Mặc định không có lỗi
+
+    if (not exists (select * from DonThuoc t where t.DonThuoc = @DonThuoc and t.MaThuoc = @MaThuoc))
     begin
-        -- Sử dụng COLLATE để so sánh không phân biệt chữ hoa/chữ thường
-        insert DonThuoc(DonThuoc, MaThuoc, Soluong) values (@DonTHuoc, @MaThuoc, @SoLuong)
+        insert DonThuoc(DonThuoc, MaThuoc,SoLuong) values (@DonThuoc, @MaThuoc,@SoLuong)
     end
     else
     begin
         raiserror (N'Đã tồn tại đơn thuốc này', 14, 1)
+        set @ErrorOccurred = 1; -- Đánh dấu có lỗi
+        rollback
     end
-commit transaction
+
+    commit transaction
+end
+
 
 select*
 from HoSoBenhNhan hsbn
@@ -186,5 +195,30 @@ begin transaction
         raiserror (N'Không Đủ Số Lượng Thuốc', 14, 1);
     end
 commit transaction;
+go
+-- tinh phi
+create or alter procedure Tinh_Phi @MaBN varchar(10),@STT int
+as
+begin transaction
+	declare @phi float 
+	select @phi = Sum(t.DonViTinh * dt.SoLuong)
+	from DonThuoc dt, Thuoc t, HoSoBenhNhan hsbn
+	where dt.MaThuoc = t.MaThuoc and hsbn.DonThuoc = dt.DonThuoc
+	update HoSoBenhNhan set PhiKham = @phi where MaBN = @MaBN and STT = @STT
+	raiserror (N'Thêm Phi Thành Công',14,1)
+commit transaction
 
-
+CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
+AS
+BEGIN TRANSACTION
+INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
+	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
+	BEGIN
+		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
+		ROLLBACK
+	END
+	ElSE
+	Begin
+		COMMIT TRANSACTION
+	END
+GO
