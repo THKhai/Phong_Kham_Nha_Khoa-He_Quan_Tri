@@ -69,5 +69,12 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var form = new MenuNV();
+            form.Show();
+            Hide();
+        }
     }
 }

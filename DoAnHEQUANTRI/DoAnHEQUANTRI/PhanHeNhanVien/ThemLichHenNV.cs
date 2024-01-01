@@ -69,7 +69,9 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            this.Close();
+            var form = new MenuNV();
+            form.Show();
+            Hide();
         }
 
         private void ThoiGian_ValueChanged_1(object sender, EventArgs e)

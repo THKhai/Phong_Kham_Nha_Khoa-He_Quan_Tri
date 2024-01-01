@@ -100,7 +100,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(118, 28);
             this.button3.TabIndex = 29;
-            this.button3.Text = "Hủy";
+            this.button3.Text = "Quay về";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 

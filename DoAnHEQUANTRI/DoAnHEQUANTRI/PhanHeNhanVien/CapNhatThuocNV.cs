@@ -17,7 +17,7 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
         SqlCommand _command = null;
         String _connectionString = "";
         
-        decimal soluong = 0;
+        
         public CapNhatThuocNV()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
         private void button1_Click(object sender, EventArgs e)
         {
             string MaThuoc = textBox1.Text;
-            soluong = numericUpDown1.Value;
+            int soluong = Convert.ToInt32(numericUpDown1.Value);
             // Kiểm tra số điện thoại không trống
             if (string.IsNullOrEmpty(MaThuoc))
             {
@@ -56,15 +56,15 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
             {
                 MessageBox.Show("Đã xảy ra lỗi khi cập nhật số lượng thuốc: " + ex.Message);
             }
-            finally
-            {
-                // Đảm bảo kết nối được đóng ngay cả khi có lỗi xảy ra hoặc không
-                if (_connection.State == ConnectionState.Open)
-                {
-                    _connection.Close();
-                }
-            }
+  
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var form = new MenuNV();
+            form.Show();
+            Hide();
         }
     }
 }
