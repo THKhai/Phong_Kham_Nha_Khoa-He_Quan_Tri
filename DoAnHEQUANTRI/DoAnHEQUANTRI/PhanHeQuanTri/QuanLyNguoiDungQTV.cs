@@ -26,7 +26,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var form = new KhoaTKQTV();
+            var form = new DKTKMoiQTV();
             form.Show();
             Hide();
 
@@ -34,9 +34,9 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var form = new MenuQTV();
+            var form = new LoginQTV();
             form.Show();
-            this.Close();
+            Hide();
         }
     }
 }
