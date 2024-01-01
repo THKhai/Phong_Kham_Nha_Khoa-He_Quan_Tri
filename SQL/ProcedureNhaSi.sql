@@ -153,8 +153,6 @@ go
 create or alter procedure ThemDonThuoc @DonTHuoc varchar(10), @MaThuoc varchar(10)
 as
 begin transaction
-	if(exists (select* from DonThuoc t where t.DonThuoc = @DonTHuoc ))
-	begin
 		if ( not exists (select* from DonThuoc t where t.DonThuoc = @DonTHuoc and t.MaThuoc = @MaThuoc))
 		begin
 			insert DonThuoc(DonThuoc,MaThuoc) values (@DonTHuoc,@MaThuoc)
@@ -163,8 +161,7 @@ begin transaction
 		begin
 			raiserror (N' Đã Tồn tại đơn thuốc này',14,1)
 		end
-	end
-	else
-		insert DonThuoc(DonThuoc,MaThuoc) values (@DonTHuoc,@MaThuoc)
 commit transaction
-	
+select*
+from HoSoBenhNhan hsbn
+where hsbn.DonThuoc = '10' and hsbn.MaBN = '03' 
