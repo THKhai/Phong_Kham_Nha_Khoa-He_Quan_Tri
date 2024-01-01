@@ -251,11 +251,17 @@
     <EmbeddedResource Include="PhanHeNhanVien\SuaNV.resx">
       <DependentUpon>SuaNV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\ThemLichHenNV.resx">
+      <DependentUpon>ThemLichHenNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\ThemNV.resx">
       <DependentUpon>ThemNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\ThemXoaSuaNV.resx">
       <DependentUpon>ThemXoaSuaNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\TinhTienNV.resx">
+      <DependentUpon>TinhTienNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\XoaNV.resx">
       <DependentUpon>XoaNV.cs</DependentUpon>
