@@ -69,3 +69,9 @@ C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\D
 C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.csproj.CoreCompileInputs.cache
 C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.exe
 C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.pdb
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.MenuQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.QuanLyThuocQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.ThemXoaSuaThuocQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.XemDMThuoc.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhaSi.ThemHSBN.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhaSi.DanhSachThuoc.resources

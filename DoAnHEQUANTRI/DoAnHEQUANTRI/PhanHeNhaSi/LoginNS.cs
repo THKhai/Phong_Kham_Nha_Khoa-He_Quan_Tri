@@ -48,13 +48,11 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                    
                     MessageBox.Show("Đăng nhập thành công");
                     this.Hide();
-                    // Thêm form giao diện khi đăng nhập thành công vào chỗ này
-                    //test1.ShowDialog(this);
-
+                    GiaoDien_NhaSi gd_hs = new GiaoDien_NhaSi();
+                    gd_hs.ShowDialog();   
                     textBox1.Text = "";
                     textBox2.Text = "";
-
-
+                    this.Show();
                 }
                 else
                 {
@@ -75,9 +73,9 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var myParent = (Home)this.Owner;
-            myParent.Show();
-            this.Close();
+                var myParent = (Home)this.Owner;
+                myParent.Show();
+                this.Close();
         }
     }
 }
