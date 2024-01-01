@@ -17,7 +17,7 @@ namespace DoAnHEQUANTRI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginNS());
+            Application.Run(new Home());
         }
     }
 }
