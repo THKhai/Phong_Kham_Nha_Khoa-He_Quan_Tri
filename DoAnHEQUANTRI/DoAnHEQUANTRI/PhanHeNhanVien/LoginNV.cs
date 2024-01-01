@@ -20,7 +20,7 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
         public LoginNV()
         {
             InitializeComponent();
-            _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=DESKTOP-HSNG6J5\SQLEXPRESS;Initial Catalog=DB_QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
 
         }
 
@@ -55,6 +55,8 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
                     MessageBox.Show("Đăng nhập thành công");
                     this.Hide();
                     // Thêm form giao diện khi đăng nhập thành công vào chỗ này
+                    var form = new MenuNV();
+                    form.Show();
                     //test1.ShowDialog(this);
 
                     textBox1.Text = "";
@@ -75,6 +77,16 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
         }
 
         private void LoginNS_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
