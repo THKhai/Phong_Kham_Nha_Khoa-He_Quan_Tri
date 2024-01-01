@@ -116,7 +116,4 @@ namespace DoAnHEQUANTRI
             updateInfoBenhNhan.ShowDialog();
         }
     }
-    
-    
-    
 }

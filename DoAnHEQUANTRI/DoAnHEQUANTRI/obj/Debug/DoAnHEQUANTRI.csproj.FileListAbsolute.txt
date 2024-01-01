@@ -126,3 +126,17 @@ E:\Workspace2\HQTCSDL\project2\Phong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoA
 E:\Workspace2\HQTCSDL\project2\Phong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.KiemTraNV.resources
 E:\Workspace2\HQTCSDL\project2\Phong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.MenuNV.resources
 E:\Workspace2\HQTCSDL\project2\Phong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.ThemXoaSuaNV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.KiemTraNV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.MenuNV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.ThemNV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.ThemXoaSuaNV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.MenuQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.QuanLyThuocQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.SuaThuocQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.ThemThuocQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.ThemXoaSuaThuocQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.XemDMThuoc.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.XemThuocDaHetHanQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeQuanTri.XoaThuocQTV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhaSi.DanhSachThuoc.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhaSi.ThemHSBN.resources
