@@ -11,15 +11,15 @@ using System.Windows.Forms;
 
 namespace DoAnHEQUANTRI.PhanHeQuanTri
 {
-    public partial class XemDMThuoc : Form
+    public partial class XemThuocDaHetHanQTV : Form
     {
-        public XemDMThuoc()
+        public XemThuocDaHetHanQTV()
         {
             InitializeComponent();
             DataTable dt = new DataTable();
             SqlConnection myConn = new SqlConnection("Data Source=DESKTOP-OB2NBQU;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True");
             myConn.Open();
-            SqlCommand myCmd = new SqlCommand("p_Xemdanhmucthuoc", myConn);
+            SqlCommand myCmd = new SqlCommand("p_Xemthuocdahethan", myConn);
             myCmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(myCmd);
             da.Fill(dt);
@@ -27,16 +27,9 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
             myConn.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            var form = new QuanLyThuocQTV();
-            form.Show();
-            this.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var form = new XemThuocDaHetHanQTV();
+            var form = new XemDMThuoc();
             form.Show();
             this.Close();
         }

@@ -1,6 +1,6 @@
-﻿namespace DoAnHEQUANTRI.PhanHeQuanTri
+﻿namespace DoAnHEQUANTRI.PhanHeNhanVien
 {
-    partial class XemDMThuoc
+    partial class KiemTraNV
     {
         /// <summary>
         /// Required designer variable.
@@ -29,53 +29,50 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(30, 20);
+            this.button1.Location = new System.Drawing.Point(291, 103);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 49);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Quay về";
+            this.button1.Size = new System.Drawing.Size(221, 63);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Thêm, Xóa, Sửa Nhân Viên";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(30, 92);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(739, 317);
-            this.dataGridView1.TabIndex = 11;
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(624, 20);
+            this.button2.Location = new System.Drawing.Point(291, 208);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(145, 49);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Xem thuốc đã hết hạn";
+            this.button2.Size = new System.Drawing.Size(221, 69);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Xem Danh Mục Nhân Viên";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // XemDMThuoc
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(586, 371);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(166, 48);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Quay về";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // KiemTraNV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "XemDMThuoc";
-            this.Text = "XemDMThuoc";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Name = "KiemTraNV";
+            this.Text = "KiemTraNV";
             this.ResumeLayout(false);
 
         }
@@ -83,7 +80,7 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
