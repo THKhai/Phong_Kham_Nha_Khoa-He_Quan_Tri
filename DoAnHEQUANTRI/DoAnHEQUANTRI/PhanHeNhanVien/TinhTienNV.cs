@@ -19,7 +19,7 @@ namespace DoAnHEQUANTRI.PhanHeNhanVien
         public TinhTienNV()
         {
             InitializeComponent();
-            _connectionString = @"Data Source=DESKTOP-HSNG6J5\SQLEXPRESS;Initial Catalog=DB_QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
 
         }
  
