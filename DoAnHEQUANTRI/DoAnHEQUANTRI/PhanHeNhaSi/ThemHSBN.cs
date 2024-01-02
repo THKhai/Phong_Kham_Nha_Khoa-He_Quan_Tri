@@ -122,11 +122,6 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            phi = ((float)numericUpDown1.Value);
-        }
-
         private void ThemHSBN_Load(object sender, EventArgs e)
         {
             Label_MaBN.Text =current_MaBN;
@@ -139,35 +134,59 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void addHSBN()
         {
-            using (_connection = new SqlConnection(_connectionString))
+            try
             {
-                using (SqlCommand command = new SqlCommand("Them_HSBN", _connection))
+                using (_connection = new SqlConnection(_connectionString))
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@MaBN", SqlDbType.VarChar, 10).Value = current_MaBN;
-                    command.Parameters.Add("@STT", SqlDbType.Int).Value =STT;
-                    command.Parameters.Add("@Ngay_Kham", SqlDbType.Date).Value = NgayKham;
-                    command.Parameters.Add("@MaNhaSi", SqlDbType.VarChar, 10).Value = MaNhasSi;
-                    command.Parameters.Add("@PhiKham", SqlDbType.VarChar, 10).Value = phi;
-                    command.Parameters.Add("@DichVu", SqlDbType.VarChar, 255).Value = Dich_Vu;
-                    command.Parameters.Add("@DonThuoc", SqlDbType.VarChar, 255).Value = MaDT;
+                    using (SqlCommand command = new SqlCommand("Them_HSBN", _connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@MaBN", SqlDbType.VarChar, 10).Value = current_MaBN;
+                        command.Parameters.Add("@STT", SqlDbType.Int).Value = STT;
+                        command.Parameters.Add("@Ngay_Kham", SqlDbType.Date).Value = NgayKham;
+                        command.Parameters.Add("@MaNhaSi", SqlDbType.VarChar, 10).Value = MaNhasSi;
+                        command.Parameters.Add("@PhiKham", SqlDbType.VarChar, 10).Value = phi;
+                        command.Parameters.Add("@DichVu", SqlDbType.VarChar, 255).Value = Dich_Vu;
+                        command.Parameters.Add("@DonThuoc", SqlDbType.VarChar, 255).Value = MaDT;
 
-                    _connection.Open();
-                    command.ExecuteNonQuery();
+                        _connection.Open();
+                        command.ExecuteNonQuery();
 
-                    // Retrieve the output parameter value after executing the stored procedure
+                        // Retrieve the output parameter value after executing the stored procedure
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Check for duplicate key violation error (Error 2627)
+                foreach (SqlError error in ex.Errors)
+                {
+                    if (error.Number == 2627)
+                    {
+                        // Duplicate key violation for DonThuoc
+                        Console.WriteLine($"Error {error.Number}: {error.Message}");
 
+                        // Display a message to the user
+                        MessageBox.Show("Lỗi: Đã tồn tại Đơn Thuốc này. Vui lòng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);                        
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error {error.Number}: {error.Message}");
+                    }
+                }
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
                     _connection.Close();
                 }
             }
+
         }
         private void button1_Click(object sender, EventArgs e)
         {
             addHSBN();
-            DanhSachThuoc dst = new DanhSachThuoc(STT,current_MaBN,MaDT);
-            this.Hide();
-            dst.ShowDialog();
-            this.Show();
         }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -177,6 +196,11 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             MaDT = textBox1.Text;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            phi = (int)numericUpDown1.Value;
         }
     }
 }

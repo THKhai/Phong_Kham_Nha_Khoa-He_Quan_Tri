@@ -16,13 +16,15 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 {
     public partial class GiaoDien_NhaSi : Form
     {
+        string MaNhaSi = null;
         string status = null;
         string MaBN_pick = null;
         SqlConnection _connection = null;
         SqlCommand _command = null;
         string _connectionString = null;
-        public GiaoDien_NhaSi()
+        public GiaoDien_NhaSi(string maNhaSi)
         {
+            MaNhaSi = maNhaSi;
             InitializeComponent();
             _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
         }
@@ -190,7 +192,12 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
             {
                 label3.Text = selectedRow.Cells["MaBN"].Value.ToString();
                 MaBN_pick = label3.Text;
-            }    
+            }
+            else if(status == "CuocHen" && (bool)selectedRow.Cells["NhaSiDat"].Value == true)
+            {
+                label3.Text = selectedRow.Cells["MaBN"].Value.ToString();
+                MaBN_pick = label3.Text;
+            }
             else
             {
                 label3.Text = ".......";
@@ -268,7 +275,21 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void button6_Click(object sender, EventArgs e)
         {
+            ThemCuocHen_NhaSi chns = new ThemCuocHen_NhaSi(MaBN_pick);
+            chns.ShowDialog();
 
+        }
+
+        private void ChinhSua_Click(object sender, EventArgs e)
+        {
+            if(status == "CuocHen")
+            {
+                UpdateCuocHenNhaSi udchns =new UpdateCuocHenNhaSi(MaBN_pick,MaNhaSi);
+                this.Hide();
+                udchns.ShowDialog();
+                this.Show();
+                LoadAllData_CuocHenNhaSi();
+            }    
         }
     }
 }

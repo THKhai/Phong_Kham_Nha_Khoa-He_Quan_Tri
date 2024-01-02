@@ -69,6 +69,7 @@ go
 CREATE TABLE DonThuoc(
 	DonThuoc varchar(10), 
 	MaThuoc varchar(10),
+	SoLuong int,
 	PRIMARY KEY(DonThuoc, MaThuoc),
 	FOREIGN KEY (DonThuoc) REFERENCES HoSoBenhNhan(DonThuoc),
 	FOREIGN KEY (MaThuoc) REFERENCES Thuoc(MaThuoc)

@@ -150,18 +150,83 @@ end
 go
 
 -- Tạo Đơn Thuốc
-create or alter procedure ThemDonThuoc @DonTHuoc varchar(10), @MaThuoc varchar(10)
+create or alter procedure ThemDonThuoc 
+    @DonThuoc varchar(10), 
+    @MaThuoc varchar(10),
+	@SoLuong int,
+    @ErrorOccurred bit output
+as
+begin
+    begin transaction
+
+    set @ErrorOccurred = 0; -- Mặc định không có lỗi
+
+    if (not exists (select * from DonThuoc t where t.DonThuoc = @DonThuoc and t.MaThuoc = @MaThuoc))
+    begin
+        insert DonThuoc(DonThuoc, MaThuoc,SoLuong) values (@DonThuoc, @MaThuoc,@SoLuong)
+    end
+    else
+    begin
+        raiserror (N'Đã tồn tại đơn thuốc này', 14, 1)
+        set @ErrorOccurred = 1; -- Đánh dấu có lỗi
+        rollback
+    end
+
+    commit transaction
+end
+go
+
+
+Set transaction isolation level read uncommitted
+go
+-- Cap Số Lượng  Thuốc Tồn kho
+create or alter procedure CapNhat_SoLuong_Thuoc 
+    @MaThuoc varchar(10), 
+    @SoLuong int,
+	@TimeDelay time
 as
 begin transaction
-		if ( not exists (select* from DonThuoc t where t.DonThuoc = @DonTHuoc and t.MaThuoc = @MaThuoc))
-		begin
-			insert DonThuoc(DonThuoc,MaThuoc) values (@DonTHuoc,@MaThuoc)
-		end
-		else
-		begin
-			raiserror (N' Đã Tồn tại đơn thuốc này',14,1)
-		end
-commit transaction
-select*
-from HoSoBenhNhan hsbn
-where hsbn.DonThuoc = '10' and hsbn.MaBN = '03' 
+    if ((select t.SoLuongTon from Thuoc t where t.MaThuoc = @MaThuoc) >= @SoLuong)
+    begin
+		-- lấy giá trị ra
+        declare @Slg int
+		select @Slg = t.SoLuongTon
+		from Thuoc t
+		where t.MaThuoc = @MaThuoc
+		-- delay
+		waitfor delay @TimeDelay
+		-- tính toán
+		update THuoc set SoLuongTon = @Slg - @SoLuong
+
+		-- kiểm tra
+		select* 
+		from Thuoc t
+		where t.MaThuoc = @MaThuoc
+		commit transaction
+    end
+    else    
+	begin
+        raiserror (N'Không Đủ Số Lượng Thuốc', 14, 1);
+    end
+go
+Set transaction isolation level read committed
+go
+
+-- tinh phi
+
+
+--CapNhatLichHen
+create or alter procedure CapNhatLichHenNS @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10)
+as
+begin transaction
+	INSERT INTO LichHen VALUES (@NgayGio,@MaBN,@MaNhaSi,1)
+	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MaBN AND LichHen.MaNhaSi = @MaNhaSi AND LichHen.NgayGio LIKE @NgayGio)
+	BEGIN
+		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
+		ROLLBACK
+	END
+	ElSE
+	Begin
+		COMMIT TRANSACTION
+	END
+go

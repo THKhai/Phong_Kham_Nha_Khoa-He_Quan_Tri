@@ -19,6 +19,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         string current_mabn = null;
         string madt = null;
         string mat = null;
+        int soluong = 0;
         SqlConnection _connection = null;
         SqlCommand _command = null;
         string _connectionString = null;
@@ -61,7 +62,13 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@DonThuoc", madt);
                     _connection.Open();
-                    command.ExecuteNonQuery();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        // Display the search result in the DataGridView
+                        dataGridView1.DataSource = dataTable;
+                    }
                     _connection.Close();
                 }
             }
@@ -122,27 +129,116 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void Add_Click(object sender, EventArgs e)
         {
-            using (_connection = new SqlConnection(_connectionString))
+            // ThemDonThuoc
+            try
             {
-                using (SqlCommand command = new SqlCommand("ThemDonThuoc", _connection))
+                bool errorOccurred = false;
+
+                using (_connection = new SqlConnection(_connectionString))
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@DonTHuoc",madt);
-                    command.Parameters.AddWithValue("@MaTHuoc",mat);
-                    _connection.Open();
-                    command.ExecuteNonQuery() ; 
+                    using (SqlCommand command = new SqlCommand("ThemDonThuoc", _connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@DonThuoc", madt);
+                        command.Parameters.AddWithValue("@MaThuoc", mat);
+                        command.Parameters.AddWithValue("@SoLuong", soluong);
+
+                        SqlParameter errorParameter = new SqlParameter("@ErrorOccurred", SqlDbType.Bit);
+                        errorParameter.Direction = ParameterDirection.Output;
+                        command.Parameters.Add(errorParameter);
+
+                        _connection.Open();
+                        command.ExecuteNonQuery();
+
+                        // Lấy giá trị output parameter
+                        errorOccurred = (bool)errorParameter.Value;
+                    }
+                }
+
+                if (errorOccurred)
+                {
+                    MessageBox.Show("Đã xảy ra lỗi khi thêm dữ liệu: Đã tồn tại đơn thuốc này");
+                }
+                else
+                {
+                    MessageBox.Show("Thêm dữ liệu thành công!");
+                    Load_DonThuoc();
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Xử lý lỗi SQL, ví dụ: ghi vào log
+                MessageBox.Show("Đã xảy ra lỗi khi thêm dữ liệu: " + ex.Message);
+            }
+            finally
+            {
+                // Đảm bảo kết nối được đóng ngay cả khi có lỗi xảy ra hoặc không
+                if (_connection.State == ConnectionState.Open)
+                {
                     _connection.Close();
                 }
             }
+            // CapNhatSoLuongThuoc
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("CapNhat_SoLuong_Thuoc", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@MaThuoc",mat);
+                        command.Parameters.AddWithValue("@SoLuong", soluong);
+                        command.Parameters.Add("@TimeDelay", SqlDbType.Time).Value = TimeSpan.FromMinutes((double)numericUpDown1.Value);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Cập nhật số lượng thuốc thành công!");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi khi cập nhật số lượng thuốc: " + ex.Message);
+            }
+            finally
+            {
+                // Đảm bảo kết nối được đóng ngay cả khi có lỗi xảy ra hoặc không
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+            // Tải lại dữ liệu sau khi thêm
             Load_DonThuoc();
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             find_medicin();
         }
 
         private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            soluong = (int)numericUpDown1.Value;
+
+        }
+
+        private void end_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
 
         }
