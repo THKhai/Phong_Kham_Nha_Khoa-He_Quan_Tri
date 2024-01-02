@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,14 +18,28 @@ namespace DoAnHEQUANTRI.PhanHeKhachHang
         SqlConnection _connection = null;
         SqlCommand _command = null;
         String _connectionString = "";
-        string maBN;
+        string maBN; int delay;
         public UpdateInfoBenhNhan(string mabn)
         {
             InitializeComponent();
             _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
             maBN = mabn;
+            delay = 0;
         }
+        private string covertIntToString(int delay)
+        {
+            if (delay < 10)
+            {
+                string res = "00000" + delay.ToString();
+                return res;
+            }
+            else
+            {
+                string res = "0000" + delay.ToString();
+                return res;
+            }
 
+        }
         private void UpdateInfoBenhNhan_Load(object sender, EventArgs e)
         {
             try
@@ -56,6 +71,8 @@ namespace DoAnHEQUANTRI.PhanHeKhachHang
             try
 
             {
+                string de = covertIntToString(delay);
+                DateTime d = DateTime.ParseExact(de, "hhmmss", CultureInfo.InvariantCulture);
                 _connection = new SqlConnection(_connectionString);
                 _connection.Open();
                 string proc = "p_UpdateInfoBN";
@@ -69,6 +86,7 @@ namespace DoAnHEQUANTRI.PhanHeKhachHang
                 _command.Parameters.Add("@DIACHI", SqlDbType.NVarChar, 255).Value = textBox2.Text;
                 _command.Parameters.Add("@SODIENTHOAI", SqlDbType.NVarChar, 255).Value = textBox3.Text;
                 _command.Parameters.Add("@MATKHAU", SqlDbType.NVarChar, 255).Value = textBox4.Text;
+                _command.Parameters.Add("@Delay", SqlDbType.DateTime).Value = d;
                 _command.ExecuteNonQuery();
                 MessageBox.Show("Cập nhật thành công");
                 _connection.Close();
@@ -80,6 +98,11 @@ namespace DoAnHEQUANTRI.PhanHeKhachHang
             catch (SqlException ex)
 
             { MessageBox.Show(ex.ToString()); }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            delay = (int)numericUpDown1.Value;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
         public KhoaTKKHFinalQTV()
         {
             InitializeComponent();
-            _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
 
         }
 

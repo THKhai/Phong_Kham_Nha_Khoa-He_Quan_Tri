@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D02B7C60-878F-46B6-BB41-0DA01D72187D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DoAnHEQUANTRI</RootNamespace>
+    <AssemblyName>DoAnHEQUANTRI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PhanHeKhachHang\DangKyLH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\DangKyLH.designer.cs">
+      <DependentUpon>DangKyLH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\GiaoDienKH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\GiaoDienKH.Designer.cs">
+      <DependentUpon>GiaoDienKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\DangKyKH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\DangKyKH.Designer.cs">
+      <DependentUpon>DangKyKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\LoginKH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\LoginKH.Designer.cs">
+      <DependentUpon>LoginKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\UpdateInfoBenhNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeKhachHang\UpdateInfoBenhNhan.Designer.cs">
+      <DependentUpon>UpdateInfoBenhNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\CapNhatThuocNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\CapNhatThuocNV.Designer.cs">
+      <DependentUpon>CapNhatThuocNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\LoginNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\LoginNV.Designer.cs">
+      <DependentUpon>LoginNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\MenuNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\MenuNV.Designer.cs">
+      <DependentUpon>MenuNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\ThemLichHenNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\ThemLichHenNV.Designer.cs">
+      <DependentUpon>ThemLichHenNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\TinhTienNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\TinhTienNV.Designer.cs">
+      <DependentUpon>TinhTienNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\CS_HSBN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\CS_HSBN.Designer.cs">
+      <DependentUpon>CS_HSBN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\DanSachThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\DanSachThuoc.Designer.cs">
+      <DependentUpon>DanSachThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\GiaoDien_NhaSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\GiaoDien_NhaSi.Designer.cs">
+      <DependentUpon>GiaoDien_NhaSi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\LoginNS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\LoginNS.Designer.cs">
+      <DependentUpon>LoginNS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\ThemCuocHen_NhaSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\ThemCuocHen_NhaSi.Designer.cs">
+      <DependentUpon>ThemCuocHen_NhaSi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\ThemHSBN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\ThemHSBN.Designer.cs">
+      <DependentUpon>ThemHSBN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKMoiQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKMoiQTV.Designer.cs">
+      <DependentUpon>DKTKMoiQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKNSMoiQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKNSMoiQTV.Designer.cs">
+      <DependentUpon>DKTKNSMoiQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKNVMoiQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\DKTKNVMoiQTV.Designer.cs">
+      <DependentUpon>DKTKNVMoiQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKKHFinalQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKKHFinalQTV.Designer.cs">
+      <DependentUpon>KhoaTKKHFinalQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKKHQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKKHQTV.Designer.cs">
+      <DependentUpon>KhoaTKKHQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKNSFinalQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKNSFinalQTV.Designer.cs">
+      <DependentUpon>KhoaTKNSFinalQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKNSQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKNSQTV.Designer.cs">
+      <DependentUpon>KhoaTKNSQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\KhoaTKQTV.Designer.cs">
+      <DependentUpon>KhoaTKQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\LoginQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\LoginQTV.Designer.cs">
+      <DependentUpon>LoginQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MenuQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MenuQTV.Designer.cs">
+      <DependentUpon>MenuQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MokhoaTKKHFinalQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MokhoaTKKHFinalQTV.Designer.cs">
+      <DependentUpon>MokhoaTKKHFinalQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MokhoaTKNSFinalQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\MokhoaTKNSFinalQTV.Designer.cs">
+      <DependentUpon>MokhoaTKNSFinalQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\QuanLyNguoiDungQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\QuanLyNguoiDungQTV.Designer.cs">
+      <DependentUpon>QuanLyNguoiDungQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\QuanLyThuocQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\QuanLyThuocQTV.Designer.cs">
+      <DependentUpon>QuanLyThuocQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\SuaThuocQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\SuaThuocQTV.Designer.cs">
+      <DependentUpon>SuaThuocQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\ThemThuocQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\ThemThuocQTV.Designer.cs">
+      <DependentUpon>ThemThuocQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\ThemXoaSuaThuocQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\ThemXoaSuaThuocQTV.Designer.cs">
+      <DependentUpon>ThemXoaSuaThuocQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XemDMThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XemDMThuoc.Designer.cs">
+      <DependentUpon>XemDMThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XemThuocDaHetHanQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XemThuocDaHetHanQTV.Designer.cs">
+      <DependentUpon>XemThuocDaHetHanQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XoaThuocQTV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeQuanTri\XoaThuocQTV.Designer.cs">
+      <DependentUpon>XoaThuocQTV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyPhongKhamNhaKhoa_HQTDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuanLyPhongKhamNhaKhoa_HQTDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PhanHeKhachHang\DangKyLH.resx">
+      <DependentUpon>DangKyLH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeKhachHang\GiaoDienKH.resx">
+      <DependentUpon>GiaoDienKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeKhachHang\DangKyKH.resx">
+      <DependentUpon>DangKyKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeKhachHang\LoginKH.resx">
+      <DependentUpon>LoginKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeKhachHang\UpdateInfoBenhNhan.resx">
+      <DependentUpon>UpdateInfoBenhNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\CapNhatThuocNV.resx">
+      <DependentUpon>CapNhatThuocNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\LoginNV.resx">
+      <DependentUpon>LoginNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\MenuNV.resx">
+      <DependentUpon>MenuNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\ThemLichHenNV.resx">
+      <DependentUpon>ThemLichHenNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\TinhTienNV.resx">
+      <DependentUpon>TinhTienNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\CS_HSBN.resx">
+      <DependentUpon>CS_HSBN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\DanSachThuoc.resx">
+      <DependentUpon>DanSachThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\GiaoDien_NhaSi.resx">
+      <DependentUpon>GiaoDien_NhaSi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\LoginNS.resx">
+      <DependentUpon>LoginNS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\ThemCuocHen_NhaSi.resx">
+      <DependentUpon>ThemCuocHen_NhaSi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\ThemHSBN.resx">
+      <DependentUpon>ThemHSBN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\DKTKMoiQTV.resx">
+      <DependentUpon>DKTKMoiQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\DKTKNSMoiQTV.resx">
+      <DependentUpon>DKTKNSMoiQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\DKTKNVMoiQTV.resx">
+      <DependentUpon>DKTKNVMoiQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKKHFinalQTV.resx">
+      <DependentUpon>KhoaTKKHFinalQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKKHQTV.resx">
+      <DependentUpon>KhoaTKKHQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKNSFinalQTV.resx">
+      <DependentUpon>KhoaTKNSFinalQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKNSQTV.resx">
+      <DependentUpon>KhoaTKNSQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\KhoaTKQTV.resx">
+      <DependentUpon>KhoaTKQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\LoginQTV.resx">
+      <DependentUpon>LoginQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\MenuQTV.resx">
+      <DependentUpon>MenuQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\MokhoaTKKHFinalQTV.resx">
+      <DependentUpon>MokhoaTKKHFinalQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\MokhoaTKNSFinalQTV.resx">
+      <DependentUpon>MokhoaTKNSFinalQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\QuanLyNguoiDungQTV.resx">
+      <DependentUpon>QuanLyNguoiDungQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\QuanLyThuocQTV.resx">
+      <DependentUpon>QuanLyThuocQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\SuaThuocQTV.resx">
+      <DependentUpon>SuaThuocQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\ThemThuocQTV.resx">
+      <DependentUpon>ThemThuocQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\ThemXoaSuaThuocQTV.resx">
+      <DependentUpon>ThemXoaSuaThuocQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\XemDMThuoc.resx">
+      <DependentUpon>XemDMThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\XemThuocDaHetHanQTV.resx">
+      <DependentUpon>XemThuocDaHetHanQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeQuanTri\XoaThuocQTV.resx">
+      <DependentUpon>XoaThuocQTV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="QuanLyPhongKhamNhaKhoa_HQTDataSet.xsc">
+      <DependentUpon>QuanLyPhongKhamNhaKhoa_HQTDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QuanLyPhongKhamNhaKhoa_HQTDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QuanLyPhongKhamNhaKhoa_HQTDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QuanLyPhongKhamNhaKhoa_HQTDataSet.xss">
+      <DependentUpon>QuanLyPhongKhamNhaKhoa_HQTDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
