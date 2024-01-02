@@ -207,7 +207,7 @@ begin transaction
 	update HoSoBenhNhan set PhiKham = @phi where MaBN = @MaBN and STT = @STT
 	raiserror (N'Thêm Phi Thành Công',14,1)
 commit transaction
-
+go
 CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
 AS
 BEGIN TRANSACTION

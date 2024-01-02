@@ -191,7 +191,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 label3.Text = selectedRow.Cells["MaBN"].Value.ToString();
                 MaBN_pick = label3.Text;
             }
-            if(status == "CuocHen" && (bool)selectedRow.Cells["NhaSiDat"].Value == true)
+            else if(status == "CuocHen" && (bool)selectedRow.Cells["NhaSiDat"].Value == true)
             {
                 dataGridView1.ReadOnly = false;
             }
@@ -279,17 +279,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void ChinhSua_Click(object sender, EventArgs e)
         {
-            if (status == "HoSoBenhNhan")
-            {
-                dataGridView1.ReadOnly = false;
-            }
-            else if (status == "CuocHen")
-            {
-
-                
-            }
-            else
-                dataGridView1.ReadOnly = true;
+            
         }
     }
 }
