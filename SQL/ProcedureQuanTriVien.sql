@@ -91,10 +91,10 @@ BEGIN TRANSACTION
 	END
 	ElSE
 	BEGIN
+		WAITFOR DELAY @Delay
 		UPDATE Thuoc
 		SET TenThuoc = @TenThuoc, DonViTinh = @DonViTinh, ChiDinh = @ChiDinh, SoLuongTon = @SoLuongTon, NgayHetHan = @NgayHetHan
 		WHERE MaThuoc = @MaThuocCu
-		WAITFOR DELAY @Delay
 	END
 COMMIT TRANSACTION
 
