@@ -176,7 +176,6 @@ begin
 end
 go
 
-
 Set transaction isolation level read uncommitted
 go
 -- Cap Số Lượng  Thuốc Tồn kho
@@ -213,7 +212,33 @@ Set transaction isolation level read committed
 go
 
 -- tinh phi
+create or alter procedure Tinh_Phi @MaBN varchar(10),@STT int
+as
+begin transaction
+	declare @phi float 
+	select @phi = Sum(t.DonViTinh * dt.SoLuong)
+	from DonThuoc dt, Thuoc t, HoSoBenhNhan hsbn
+	where dt.MaThuoc = t.MaThuoc and hsbn.DonThuoc = dt.DonThuoc
+	update HoSoBenhNhan set PhiKham = @phi where MaBN = @MaBN and STT = @STT
+	raiserror (N'Thêm Phi Thành Công',14,1)
+commit transaction
+go
 
+--Dang Ky Lich Hen
+CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
+AS
+BEGIN TRANSACTION
+INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
+	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
+	BEGIN
+		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
+		ROLLBACK
+	END
+	ElSE
+	Begin
+		COMMIT TRANSACTION
+	END
+GO
 
 --CapNhatLichHen
 create or alter procedure CapNhatLichHenNS @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10)

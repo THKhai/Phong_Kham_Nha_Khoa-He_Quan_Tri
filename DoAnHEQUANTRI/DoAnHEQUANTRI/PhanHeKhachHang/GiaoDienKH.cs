@@ -36,7 +36,7 @@ namespace DoAnHEQUANTRI
         private void GiaoDienKH_Load(object sender, EventArgs e)
         {
             label1.Text = "Mã khách hàng của bạn là: " + maKH;
-            _connectionString = @"Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
 
         }
 

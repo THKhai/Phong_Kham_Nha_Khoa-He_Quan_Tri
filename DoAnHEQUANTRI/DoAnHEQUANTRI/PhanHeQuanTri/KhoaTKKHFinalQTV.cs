@@ -19,7 +19,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
         public KhoaTKKHFinalQTV()
         {
             InitializeComponent();
-            _connectionString = @"Data Source=DESKTOP-OB2NBQU;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
 
         }
 
@@ -60,6 +60,11 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
             var form = new KhoaTKKHQTV();
             form.Show();
             this.Close();
+        }
+
+        private void KhoaTKKHFinalQTV_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
