@@ -84,7 +84,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Home";
-            this.Text = "Form1";
+            this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
             this.ResumeLayout(false);
 
