@@ -98,5 +98,10 @@ namespace DoAnHEQUANTRI
 
             _connection.Close();
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
