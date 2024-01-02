@@ -341,11 +341,17 @@
     <EmbeddedResource Include="PhanHeNhanVien\MenuNV.resx">
       <DependentUpon>MenuNV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\ThemLichHenNV.resx">
+      <DependentUpon>ThemLichHenNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\ThemNV.resx">
       <DependentUpon>ThemNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\ThemXoaSuaNV.resx">
       <DependentUpon>ThemXoaSuaNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\TinhTienNV.resx">
+      <DependentUpon>TinhTienNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\DanSachThuoc.resx">
       <DependentUpon>DanSachThuoc.cs</DependentUpon>
