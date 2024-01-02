@@ -1,4 +1,4 @@
-﻿using DoAnHEQUANTRI.PhanHeKhachHang;
+using DoAnHEQUANTRI.PhanHeKhachHang;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

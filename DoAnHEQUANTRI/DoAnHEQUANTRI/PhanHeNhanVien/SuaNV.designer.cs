@@ -1,6 +1,6 @@
-﻿namespace DoAnHEQUANTRI.PhanHeNhaSi
+﻿namespace DoAnHEQUANTRI.PhanHeNhanVien
 {
-    partial class CS_HSBN
+    partial class SuaNV
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(389, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Chỉnh Sửa";
-            // 
-            // CS_HSBN
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 571);
-            this.Controls.Add(this.label1);
-            this.Name = "CS_HSBN";
-            this.Text = "CS_HSBN";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "SuaNV";
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
     }
 }

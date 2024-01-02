@@ -68,5 +68,10 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
             form.Show();
             this.Close();
         }
+
+        private void DKTKNSMoiQTV_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

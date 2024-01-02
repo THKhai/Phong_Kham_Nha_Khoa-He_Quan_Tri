@@ -88,6 +88,12 @@
     <Compile Include="PhanHeNhanVien\CapNhatThuocNV.Designer.cs">
       <DependentUpon>CapNhatThuocNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhanHeNhanVien\KiemTraNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\KiemTraNV.Designer.cs">
+      <DependentUpon>KiemTraNV.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhanHeNhanVien\LoginNV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,11 +106,29 @@
     <Compile Include="PhanHeNhanVien\MenuNV.Designer.cs">
       <DependentUpon>MenuNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhanHeNhanVien\SuaNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\SuaNV.Designer.cs">
+      <DependentUpon>SuaNV.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhanHeNhanVien\ThemLichHenNV.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PhanHeNhanVien\ThemLichHenNV.Designer.cs">
       <DependentUpon>ThemLichHenNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\ThemNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\ThemNV.Designer.cs">
+      <DependentUpon>ThemNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\ThemXoaSuaNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\ThemXoaSuaNV.Designer.cs">
+      <DependentUpon>ThemXoaSuaNV.cs</DependentUpon>
     </Compile>
     <Compile Include="PhanHeNhanVien\TinhTienNV.cs">
       <SubType>Form</SubType>
@@ -112,11 +136,17 @@
     <Compile Include="PhanHeNhanVien\TinhTienNV.Designer.cs">
       <DependentUpon>TinhTienNV.cs</DependentUpon>
     </Compile>
-    <Compile Include="PhanHeNhaSi\CS_HSBN.cs">
+    <Compile Include="PhanHeNhanVien\XemDMNV.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PhanHeNhaSi\CS_HSBN.Designer.cs">
-      <DependentUpon>CS_HSBN.cs</DependentUpon>
+    <Compile Include="PhanHeNhanVien\XemDMNV.Designer.cs">
+      <DependentUpon>XemDMNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\XoaNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhanVien\XoaNV.Designer.cs">
+      <DependentUpon>XoaNV.cs</DependentUpon>
     </Compile>
     <Compile Include="PhanHeNhaSi\DanSachThuoc.cs">
       <SubType>Form</SubType>
@@ -147,6 +177,12 @@
     </Compile>
     <Compile Include="PhanHeNhaSi\ThemHSBN.Designer.cs">
       <DependentUpon>ThemHSBN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\UpdateCuocHenNhaSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\UpdateCuocHenNhaSi.Designer.cs">
+      <DependentUpon>UpdateCuocHenNhaSi.cs</DependentUpon>
     </Compile>
     <Compile Include="PhanHeQuanTri\DKTKMoiQTV.cs">
       <SubType>Form</SubType>
@@ -296,6 +332,9 @@
     <EmbeddedResource Include="PhanHeNhanVien\CapNhatThuocNV.resx">
       <DependentUpon>CapNhatThuocNV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\KiemTraNV.resx">
+      <DependentUpon>KiemTraNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\LoginNV.resx">
       <DependentUpon>LoginNV.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,11 +344,14 @@
     <EmbeddedResource Include="PhanHeNhanVien\ThemLichHenNV.resx">
       <DependentUpon>ThemLichHenNV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\ThemNV.resx">
+      <DependentUpon>ThemNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\ThemXoaSuaNV.resx">
+      <DependentUpon>ThemXoaSuaNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\TinhTienNV.resx">
       <DependentUpon>TinhTienNV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PhanHeNhaSi\CS_HSBN.resx">
-      <DependentUpon>CS_HSBN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\DanSachThuoc.resx">
       <DependentUpon>DanSachThuoc.cs</DependentUpon>
@@ -325,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\ThemHSBN.resx">
       <DependentUpon>ThemHSBN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\UpdateCuocHenNhaSi.resx">
+      <DependentUpon>UpdateCuocHenNhaSi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeQuanTri\DKTKMoiQTV.resx">
       <DependentUpon>DKTKMoiQTV.cs</DependentUpon>

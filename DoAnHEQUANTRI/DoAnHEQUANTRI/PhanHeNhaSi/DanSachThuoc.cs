@@ -129,6 +129,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void Add_Click(object sender, EventArgs e)
         {
+            // ThemDonThuoc
             try
             {
                 bool errorOccurred = false;
@@ -177,6 +178,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                     _connection.Close();
                 }
             }
+            // CapNhatSoLuongThuoc
             try
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -186,6 +188,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@MaThuoc",mat);
                         command.Parameters.AddWithValue("@SoLuong", soluong);
+                        command.Parameters.Add("@TimeDelay", SqlDbType.Time).Value = TimeSpan.FromMinutes((double)numericUpDown1.Value);
 
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -211,10 +214,6 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         }
 
 
-        private void tinhphi()
-        {
-
-        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             find_medicin();
@@ -246,6 +245,16 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 }
             }
             this.Close();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

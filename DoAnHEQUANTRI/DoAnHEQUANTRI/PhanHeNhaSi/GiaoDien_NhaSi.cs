@@ -16,13 +16,15 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 {
     public partial class GiaoDien_NhaSi : Form
     {
+        string MaNhaSi = null;
         string status = null;
         string MaBN_pick = null;
         SqlConnection _connection = null;
         SqlCommand _command = null;
         string _connectionString = null;
-        public GiaoDien_NhaSi()
+        public GiaoDien_NhaSi(string maNhaSi)
         {
+            MaNhaSi = maNhaSi;
             InitializeComponent();
             _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
         }
@@ -191,9 +193,10 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 label3.Text = selectedRow.Cells["MaBN"].Value.ToString();
                 MaBN_pick = label3.Text;
             }
-            if(status == "CuocHen" && (bool)selectedRow.Cells["NhaSiDat"].Value == true)
+            else if(status == "CuocHen" && (bool)selectedRow.Cells["NhaSiDat"].Value == true)
             {
-                dataGridView1.ReadOnly = false;
+                label3.Text = selectedRow.Cells["MaBN"].Value.ToString();
+                MaBN_pick = label3.Text;
             }
             else
             {
@@ -279,17 +282,14 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void ChinhSua_Click(object sender, EventArgs e)
         {
-            if (status == "HoSoBenhNhan")
+            if(status == "CuocHen")
             {
-                dataGridView1.ReadOnly = false;
-            }
-            else if (status == "CuocHen")
-            {
-
-                
-            }
-            else
-                dataGridView1.ReadOnly = true;
+                UpdateCuocHenNhaSi udchns =new UpdateCuocHenNhaSi(MaBN_pick,MaNhaSi);
+                this.Hide();
+                udchns.ShowDialog();
+                this.Show();
+                LoadAllData_CuocHenNhaSi();
+            }    
         }
     }
 }

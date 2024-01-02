@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DoAnHEQUANTRI.PhanHeNhaSi
+namespace DoAnHEQUANTRI.PhanHeNhanVien
 {
-    public partial class CS_HSBN : Form
+    public partial class SuaNV : Form
     {
-        public CS_HSBN()
+        public SuaNV()
         {
             InitializeComponent();
         }
