@@ -19,7 +19,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
         public XoaThuocQTV()
         {
             InitializeComponent();
-            _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=DESKTOP-OB2NBQU;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -46,6 +46,8 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
                     _command.ExecuteNonQuery();
                     MessageBox.Show("Xóa thuốc thành công");
                     this.Close();
+                    var form = new ThemXoaSuaThuocQTV();
+                    form.Show();
                 }
             }
             catch (SqlException ex)

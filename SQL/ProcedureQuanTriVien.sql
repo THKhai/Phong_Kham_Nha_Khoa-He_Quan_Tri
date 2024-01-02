@@ -1,5 +1,7 @@
 ﻿use QuanLyPhongKhamNhaKhoa_HQT
 
+/*delete from DonThuoc
+delete from Thuoc*/
 go
 CREATE OR ALTER PROCEDURE p_KtraTKQTV @MAQTV VARCHAR(20), @MATKHAU NVARCHAR(255),
 @OK BIT OUT
@@ -45,9 +47,7 @@ BEGIN TRANSACTION
 		VALUES (@MaThuoc, @TenThuoc, @DonViTinh, @ChiDinh, @SoLuongTon, @NgayHetHan);
 		--WAITFOR DELAY '00:00:10'
 	END
-	BEGIN
-		COMMIT TRANSACTION
-	END
+COMMIT TRANSACTION
 
 --Xoa thuoc
 go
@@ -56,8 +56,6 @@ CREATE OR ALTER PROCEDURE p_XoaThuoc
 	@Delay TIME
 AS
 BEGIN TRANSACTION
-	DELETE Thuoc
-	WHERE MaThuoc = @MaThuoc
 	--WAITFOR DELAY '00:00:10'
 	IF NOT EXISTS(SELECT * FROM Thuoc WHERE @MaThuoc = MaThuoc)
 	BEGIN
@@ -66,6 +64,10 @@ BEGIN TRANSACTION
 	END
 	ElSE
 	BEGIN
+		DELETE Thuoc
+		WHERE MaThuoc = @MaThuoc
+	END
+	BEGIN
 		COMMIT TRANSACTION
 	END
 
@@ -73,34 +75,28 @@ BEGIN TRANSACTION
 go
 CREATE OR ALTER PROCEDURE p_SuaThuoc
 	@MaThuocCu VARCHAR(10),
-	@MaThuocMoi VARCHAR(10),
+	--@MaThuocMoi VARCHAR(10),
 	@TenThuoc NVARCHAR(255),
 	@DonViTinh NVARCHAR(50),
     @ChiDinh NVARCHAR(MAX),
     @SoLuongTon INT,
     @NgayHetHan DATE,
-	@Delay TIME
+	@Delay DATETIME
 AS
 BEGIN TRANSACTION
-	UPDATE Thuoc
-	SET MaThuoc = @MaThuocMoi, TenThuoc = @TenThuoc, DonViTinh = @DonViTinh, ChiDinh = @ChiDinh, SoLuongTon = @SoLuongTon, NgayHetHan = @NgayHetHan
-	WHERE MaThuoc = MaThuoc
-	--WAITFOR DELAY '00:00:10'
 	IF NOT EXISTS(SELECT * FROM Thuoc WHERE @MaThuocCu = MaThuoc)
 	BEGIN
 		RAISERROR(N'Mã thuốc cần chỉnh sửa không tồn tại',14,1)
 		ROLLBACK
 	END
 	ElSE
-	IF EXISTS(SELECT * FROM Thuoc WHERE @MaThuocMoi = MaThuoc)
 	BEGIN
-		RAISERROR(N'Mã thuốc mới đã tồn tại',14,1)
-		ROLLBACK
+		UPDATE Thuoc
+		SET TenThuoc = @TenThuoc, DonViTinh = @DonViTinh, ChiDinh = @ChiDinh, SoLuongTon = @SoLuongTon, NgayHetHan = @NgayHetHan
+		WHERE MaThuoc = @MaThuocCu
+		WAITFOR DELAY @Delay
 	END
-	ElSE
-	BEGIN
-		COMMIT TRANSACTION
-	END
+COMMIT TRANSACTION
 
 --xem thuoc da het han
 go
