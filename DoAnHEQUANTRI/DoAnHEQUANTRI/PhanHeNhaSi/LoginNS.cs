@@ -14,12 +14,14 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 {
     public partial class LoginNS : Form
     {
+        string MaNhaSi = null;
         public static LoginKH instance;
         SqlConnection _connection = null;
         SqlCommand _command = null;
         String _connectionString = "";
         public LoginNS()
         {
+            
             InitializeComponent();
             _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
 
@@ -45,10 +47,10 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 bool ok = (bool)_command.Parameters["@OK"].Value;
                 if (ok == true)
                 {
-                   
+                    MaNhaSi = textBox1.Text;
                     MessageBox.Show("Đăng nhập thành công");
                     this.Hide();
-                    GiaoDien_NhaSi gd_hs = new GiaoDien_NhaSi();
+                    GiaoDien_NhaSi gd_hs = new GiaoDien_NhaSi(MaNhaSi);
                     gd_hs.ShowDialog();   
                     textBox1.Text = "";
                     textBox2.Text = "";

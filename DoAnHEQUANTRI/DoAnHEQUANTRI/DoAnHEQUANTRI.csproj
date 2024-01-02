@@ -148,12 +148,6 @@
     <Compile Include="PhanHeNhanVien\XoaNV.Designer.cs">
       <DependentUpon>XoaNV.cs</DependentUpon>
     </Compile>
-    <Compile Include="PhanHeNhaSi\CS_HSBN.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PhanHeNhaSi\CS_HSBN.Designer.cs">
-      <DependentUpon>CS_HSBN.cs</DependentUpon>
-    </Compile>
     <Compile Include="PhanHeNhaSi\DanSachThuoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +177,12 @@
     </Compile>
     <Compile Include="PhanHeNhaSi\ThemHSBN.Designer.cs">
       <DependentUpon>ThemHSBN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\UpdateCuocHenNhaSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhanHeNhaSi\UpdateCuocHenNhaSi.Designer.cs">
+      <DependentUpon>UpdateCuocHenNhaSi.cs</DependentUpon>
     </Compile>
     <Compile Include="PhanHeQuanTri\DKTKMoiQTV.cs">
       <SubType>Form</SubType>
@@ -344,9 +344,6 @@
     <EmbeddedResource Include="PhanHeNhanVien\ThemXoaSuaNV.resx">
       <DependentUpon>ThemXoaSuaNV.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PhanHeNhaSi\CS_HSBN.resx">
-      <DependentUpon>CS_HSBN.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\DanSachThuoc.resx">
       <DependentUpon>DanSachThuoc.cs</DependentUpon>
     </EmbeddedResource>
@@ -361,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhaSi\ThemHSBN.resx">
       <DependentUpon>ThemHSBN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhaSi\UpdateCuocHenNhaSi.resx">
+      <DependentUpon>UpdateCuocHenNhaSi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhanHeQuanTri\DKTKMoiQTV.resx">
       <DependentUpon>DKTKMoiQTV.cs</DependentUpon>

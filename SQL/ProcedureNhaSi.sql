@@ -174,45 +174,53 @@ begin
 
     commit transaction
 end
-
-
-select*
-from HoSoBenhNhan hsbn
-where hsbn.DonThuoc = '10' and hsbn.MaBN = '03' 
-
--- Cap Số Lượng  Thuốc Tồn kho
 go
+
+
+Set transaction isolation level read uncommitted
+go
+-- Cap Số Lượng  Thuốc Tồn kho
 create or alter procedure CapNhat_SoLuong_Thuoc 
     @MaThuoc varchar(10), 
-    @SoLuong int
+    @SoLuong int,
+	@TimeDelay time
 as
 begin transaction
     if ((select t.SoLuongTon from Thuoc t where t.MaThuoc = @MaThuoc) >= @SoLuong)
     begin
-        update Thuoc set SoLuongTon = SoLuongTon - @SoLuong where MaThuoc = @MaThuoc;
+		-- lấy giá trị ra
+        declare @Slg int
+		select @Slg = t.SoLuongTon
+		from Thuoc t
+		where t.MaThuoc = @MaThuoc
+		-- delay
+		waitfor delay @TimeDelay
+		-- tính toán
+		update THuoc set SoLuongTon = @Slg - @SoLuong
+
+		-- kiểm tra
+		select* 
+		from Thuoc t
+		where t.MaThuoc = @MaThuoc
+		commit transaction
     end
-    else    begin
+    else    
+	begin
         raiserror (N'Không Đủ Số Lượng Thuốc', 14, 1);
     end
-commit transaction;
 go
+Set transaction isolation level read committed
+go
+
 -- tinh phi
-create or alter procedure Tinh_Phi @MaBN varchar(10),@STT int
+
+
+--CapNhatLichHen
+create or alter procedure CapNhatLichHenNS @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10)
 as
 begin transaction
-	declare @phi float 
-	select @phi = Sum(t.DonViTinh * dt.SoLuong)
-	from DonThuoc dt, Thuoc t, HoSoBenhNhan hsbn
-	where dt.MaThuoc = t.MaThuoc and hsbn.DonThuoc = dt.DonThuoc
-	update HoSoBenhNhan set PhiKham = @phi where MaBN = @MaBN and STT = @STT
-	raiserror (N'Thêm Phi Thành Công',14,1)
-commit transaction
-go
-CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
-AS
-BEGIN TRANSACTION
-INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
-	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
+	INSERT INTO LichHen VALUES (@NgayGio,@MaBN,@MaNhaSi,1)
+	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MaBN AND LichHen.MaNhaSi = @MaNhaSi AND LichHen.NgayGio LIKE @NgayGio)
 	BEGIN
 		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
 		ROLLBACK
@@ -221,4 +229,4 @@ INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
 	Begin
 		COMMIT TRANSACTION
 	END
-GO
+go
