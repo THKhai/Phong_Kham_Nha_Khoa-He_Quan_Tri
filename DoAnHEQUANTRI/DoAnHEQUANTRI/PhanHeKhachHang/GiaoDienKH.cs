@@ -16,14 +16,15 @@ namespace DoAnHEQUANTRI
 {   
     public partial class GiaoDienKH : Form
     {
-        string maKH;
+        string maKH, sdt;
         SqlConnection _connection = null;
         SqlCommand _command = null;
         String _connectionString = "";
-        public GiaoDienKH(string MAKH)
+        public GiaoDienKH(string MAKH,string SDT)
         {
             InitializeComponent();
             maKH = MAKH;
+            sdt = SDT;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,6 +37,7 @@ namespace DoAnHEQUANTRI
         private void GiaoDienKH_Load(object sender, EventArgs e)
         {
             label1.Text = "Mã khách hàng của bạn là: " + maKH;
+            label2.Text = "Số điện thoại khách hàng: " + sdt;
             _connectionString = @"Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
 
         }
