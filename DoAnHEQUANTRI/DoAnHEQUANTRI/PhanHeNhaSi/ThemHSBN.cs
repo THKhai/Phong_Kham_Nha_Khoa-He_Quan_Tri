@@ -158,22 +158,13 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
             }
             catch (SqlException ex)
             {
-                // Check for duplicate key violation error (Error 2627)
+                // Xử lý lỗi từ thủ tục SQL
                 foreach (SqlError error in ex.Errors)
                 {
-                    if (error.Number == 2627)
-                    {
-                        // Duplicate key violation for DonThuoc
-                        Console.WriteLine($"Error {error.Number}: {error.Message}");
-
-                        // Display a message to the user
-                        MessageBox.Show("Lỗi: Đã tồn tại Đơn Thuốc này. Vui lòng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);                        
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Error {error.Number}: {error.Message}");
-                    }
+                    Console.WriteLine($"Error {error.Number}: {error.Message}");
                 }
+
+                // Bạn có thể thêm mã để quay lại trạng thái trước khi lỗi xảy ra hoặc thực hiện các hành động xử lý lỗi khác tại đây.
             }
             finally
             {
@@ -182,11 +173,15 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                     _connection.Close();
                 }
             }
-
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             addHSBN();
+            DanhSachThuoc dst = new DanhSachThuoc(STT,current_MaBN,MaDT);
+            this.Hide();
+            dst.ShowDialog();
+            this.Close();
         }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -196,11 +191,6 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             MaDT = textBox1.Text;
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            phi = (int)numericUpDown1.Value;
         }
     }
 }

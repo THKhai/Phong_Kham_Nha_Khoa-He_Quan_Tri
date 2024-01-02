@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace DoAnHEQUANTRI.PhanHeNhanVien
 {
-    public partial class CapNhatThuocNV : Form
+    public partial class XemDMNV : Form
     {
-        public CapNhatThuocNV()
+        public XemDMNV()
         {
             InitializeComponent();
-        }
-
-        private void CapNhatThuocNV_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

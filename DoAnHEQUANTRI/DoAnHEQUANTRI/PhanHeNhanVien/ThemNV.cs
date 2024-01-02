@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace DoAnHEQUANTRI.PhanHeNhanVien
 {
-    public partial class CapNhatThuocNV : Form
+    public partial class ThemNV : Form
     {
-        public CapNhatThuocNV()
+        public ThemNV()
         {
             InitializeComponent();
         }
 
-        private void CapNhatThuocNV_Load(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

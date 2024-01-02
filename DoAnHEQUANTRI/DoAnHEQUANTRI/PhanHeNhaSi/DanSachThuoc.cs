@@ -212,6 +212,8 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
             // Tải lại dữ liệu sau khi thêm
             Load_DonThuoc();
         }
+
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             find_medicin();
@@ -230,6 +232,18 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void end_Click(object sender, EventArgs e)
         {
+            using (_connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("Tinh_Phi", _connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@MaBN", current_mabn);
+                    command.Parameters.AddWithValue("@STT", stt);
+                    _connection.Open();
+                    command.ExecuteNonQuery();
+
+                }
+            }
             this.Close();
         }
 

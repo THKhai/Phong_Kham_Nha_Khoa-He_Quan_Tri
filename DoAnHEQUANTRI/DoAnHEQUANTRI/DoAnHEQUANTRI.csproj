@@ -329,6 +329,9 @@
     <EmbeddedResource Include="PhanHeKhachHang\UpdateInfoBenhNhan.resx">
       <DependentUpon>UpdateInfoBenhNhan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhanHeNhanVien\CapNhatThuocNV.resx">
+      <DependentUpon>CapNhatThuocNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PhanHeNhanVien\KiemTraNV.resx">
       <DependentUpon>KiemTraNV.cs</DependentUpon>
     </EmbeddedResource>
