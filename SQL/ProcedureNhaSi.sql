@@ -270,7 +270,7 @@ go
 create or alter procedure CapNhatLichHenNS_FIX @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10)
 as
 begin transaction
-	INSERT INTO LichHen VALUES (@NgayGio,@MaBN,@MaNhaSi,1)
+	update LichHen Set NgayGio = @NgayGio where @MaNhaSi = @MaNhaSi and MaBN = @MaBN 
 	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MaBN AND LichHen.MaNhaSi = @MaNhaSi AND LichHen.NgayGio LIKE @NgayGio)
 	BEGIN
 		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
@@ -344,9 +344,12 @@ go
 --CapNhatLichHen-- dirty read
 create or alter procedure CapNhatLichHenNS @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10)
 as
+Set transaction isolation level	read uncommitted
 begin transaction
-	INSERT INTO LichHen VALUES (@NgayGio,@MaBN,@MaNhaSi,1)
+	update LichHen Set NgayGio = @NgayGio where @MaNhaSi = @MaNhaSi and MaBN = @MaBN 
+
 	waitfor delay '00:00:10'
+
 	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MaBN AND LichHen.MaNhaSi = @MaNhaSi AND LichHen.NgayGio LIKE @NgayGio)
 	BEGIN
 		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
