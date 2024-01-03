@@ -216,7 +216,7 @@ create or alter procedure CapNhat_SoLuong_Thuoc
     @SoLuong int,
 	@TimeDelay varchar(10)
 as
-Set transaction isolation level	Serializable
+Set transaction isolation level	read uncommitted
 begin transaction
     if ((select t.SoLuongTon from Thuoc t where t.MaThuoc = @MaThuoc) >= @SoLuong)
     begin
@@ -252,7 +252,7 @@ CREATE OR ALTER PROCEDURE Xem_LH_Ngay
     @Ngay DATETIME,
     @TimeDelay VARCHAR(10)
 AS
-Set transaction isolation level	serializable 
+Set transaction isolation level	read uncommitted
 BEGIN
     BEGIN TRANSACTION;
 
@@ -287,7 +287,7 @@ create or alter procedure Them_HSBN
 	@DonThuoc varchar(10),
 	@TimeDelay varchar(10)
 as
-Set transaction isolation level	read committed
+Set transaction isolation level	read uncommitted
 begin transaction
 	waitfor delay @TimeDelay
 
