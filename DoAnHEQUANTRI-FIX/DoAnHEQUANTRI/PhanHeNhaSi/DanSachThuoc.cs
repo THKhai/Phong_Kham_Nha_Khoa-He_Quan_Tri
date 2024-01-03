@@ -129,59 +129,13 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void Add_Click(object sender, EventArgs e)
         {
-            try
-            {
-                bool errorOccurred = false;
-
-                using (_connection = new SqlConnection(_connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("ThemDonThuoc", _connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@DonThuoc", madt);
-                        command.Parameters.AddWithValue("@MaThuoc", mat);
-                        command.Parameters.AddWithValue("@SoLuong", soluong);
-
-                        SqlParameter errorParameter = new SqlParameter("@ErrorOccurred", SqlDbType.Bit);
-                        errorParameter.Direction = ParameterDirection.Output;
-                        command.Parameters.Add(errorParameter);
-
-                        _connection.Open();
-                        command.ExecuteNonQuery();
-
-                        // Lấy giá trị output parameter
-                        errorOccurred = (bool)errorParameter.Value;
-                    }
-                }
-
-                if (errorOccurred)
-                {
-                    MessageBox.Show("Đã xảy ra lỗi khi thêm dữ liệu: Đã tồn tại đơn thuốc này");
-                }
-                else
-                {
-                    MessageBox.Show("Thêm dữ liệu thành công!");
-                    Load_DonThuoc();
-                }
-            }
-            catch (SqlException ex)
-            {
-                // Xử lý lỗi SQL, ví dụ: ghi vào log
-                MessageBox.Show("Đã xảy ra lỗi khi thêm dữ liệu: " + ex.Message);
-            }
-            finally
-            {
-                // Đảm bảo kết nối được đóng ngay cả khi có lỗi xảy ra hoặc không
-                if (_connection.State == ConnectionState.Open)
-                {
-                    _connection.Close();
-                }
-            }
+            
+            // CapNhatSoLuongThuoc
             try
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("CapNhat_SoLuong_Thuoc", connection))
+                    using (SqlCommand command = new SqlCommand("CapNhat_SoLuong_Thuoc_FIX", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@MaThuoc",mat);
@@ -193,6 +147,56 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 }
 
                 MessageBox.Show("Cập nhật số lượng thuốc thành công!");
+                // ThemDonThuoc
+                try
+                {
+                    bool errorOccurred = false;
+
+                    using (_connection = new SqlConnection(_connectionString))
+                    {
+                        using (SqlCommand command = new SqlCommand("ThemDonThuoc", _connection))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.Parameters.AddWithValue("@DonThuoc", madt);
+                            command.Parameters.AddWithValue("@MaThuoc", mat);
+                            command.Parameters.AddWithValue("@SoLuong", soluong);
+
+                            SqlParameter errorParameter = new SqlParameter("@ErrorOccurred", SqlDbType.Bit);
+                            errorParameter.Direction = ParameterDirection.Output;
+                            command.Parameters.Add(errorParameter);
+
+                            _connection.Open();
+                            command.ExecuteNonQuery();
+
+                            // Lấy giá trị output parameter
+                            errorOccurred = (bool)errorParameter.Value;
+                        }
+                    }
+
+                    if (errorOccurred)
+                    {
+                        MessageBox.Show("Đã xảy ra lỗi khi thêm dữ liệu: Không Đủ Thuốc trong kho");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thêm dữ liệu thành công!");
+                        Load_DonThuoc();
+                        Load_DanhSachThuoc();
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    // Xử lý lỗi SQL, ví dụ: ghi vào log
+                    MessageBox.Show("Đã xảy ra lỗi khi thêm dữ liệu: " + ex.Message);
+                }
+                finally
+                {
+                    // Đảm bảo kết nối được đóng ngay cả khi có lỗi xảy ra hoặc không
+                    if (_connection.State == ConnectionState.Open)
+                    {
+                        _connection.Close();
+                    }
+                }
             }
             catch (SqlException ex)
             {
@@ -208,13 +212,10 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
             }
             // Tải lại dữ liệu sau khi thêm
             Load_DonThuoc();
+            Load_DanhSachThuoc() ;
         }
 
 
-        private void tinhphi()
-        {
-
-        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             find_medicin();
@@ -233,19 +234,27 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void end_Click(object sender, EventArgs e)
         {
-            using (_connection = new SqlConnection(_connectionString))
-            {
-                using (SqlCommand command = new SqlCommand("Tinh_Phi", _connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@MaBN", current_mabn);
-                    command.Parameters.AddWithValue("@STT", stt);
-                    _connection.Open();
-                    command.ExecuteNonQuery();
-
-                }
-            }
             this.Close();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -16,19 +16,22 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 {
     public partial class GiaoDien_NhaSi : Form
     {
+        string MaNhaSi = null;
         string status = null;
         string MaBN_pick = null;
         SqlConnection _connection = null;
         SqlCommand _command = null;
         string _connectionString = null;
-        public GiaoDien_NhaSi()
+        public GiaoDien_NhaSi(string maNhaSi)
         {
+            MaNhaSi = maNhaSi;
             InitializeComponent();
             _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
         }
         // LOAD FORM
         private void GiaoDien_NhaSi_Load(object sender, EventArgs e)
         {
+            label5.Text = MaNhaSi;
             textBox2.ReadOnly = true;   
         }
 
@@ -82,6 +85,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 using (SqlCommand command = new SqlCommand("p_Read_CuocHenNhaSi", _connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@MaNhaSi", MaNhaSi);
                     _connection.Open();
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -191,9 +195,10 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 label3.Text = selectedRow.Cells["MaBN"].Value.ToString();
                 MaBN_pick = label3.Text;
             }
-            if(status == "CuocHen" && (bool)selectedRow.Cells["NhaSiDat"].Value == true)
+            else if(status == "CuocHen" && (bool)selectedRow.Cells["NhaSiDat"].Value == true)
             {
-                dataGridView1.ReadOnly = false;
+                label3.Text = selectedRow.Cells["MaBN"].Value.ToString();
+                MaBN_pick = label3.Text;
             }
             else
             {
@@ -279,17 +284,41 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void ChinhSua_Click(object sender, EventArgs e)
         {
-            if (status == "HoSoBenhNhan")
+            if(status == "CuocHen")
             {
-                dataGridView1.ReadOnly = false;
-            }
-            else if (status == "CuocHen")
-            {
+                UpdateCuocHenNhaSi udchns =new UpdateCuocHenNhaSi(MaBN_pick,MaNhaSi);
+                this.Hide();
+                udchns.ShowDialog();
+                this.Show();
+                LoadAllData_CuocHenNhaSi();
+            }    
+        }
 
-                
+        private void button7_Click(object sender, EventArgs e)
+        {
+            using (_connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("Xem_LH_Ngay_FIX", _connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@MaNhaSi",MaNhaSi);
+                    command.Parameters.Add("@Ngay", SqlDbType.Date).Value = dateTimePicker1.Value.Date;
+                    _connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        // Display the search result in the DataGridView
+                        dataGridView1.DataSource = dataTable;
+                    }
+                    _connection.Close();
+                }
             }
-            else
-                dataGridView1.ReadOnly = true;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

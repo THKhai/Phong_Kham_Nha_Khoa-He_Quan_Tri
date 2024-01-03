@@ -148,7 +148,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                         command.Parameters.Add("@PhiKham", SqlDbType.VarChar, 10).Value = phi;
                         command.Parameters.Add("@DichVu", SqlDbType.VarChar, 255).Value = Dich_Vu;
                         command.Parameters.Add("@DonThuoc", SqlDbType.VarChar, 255).Value = MaDT;
-                        command.Parameters.AddWithValue("@TimeDelay", textBox2.Text);
+
                         
 
 
