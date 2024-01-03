@@ -19,7 +19,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
         public ThemThuocQTV()
         {
             InitializeComponent();
-            _connectionString = @"Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=DESKTOP-OB2NBQU;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
                     _command.Parameters.Add("@ChiDinh", SqlDbType.NVarChar);
                     _command.Parameters.Add("@SoLuongTon", SqlDbType.Int);
                     _command.Parameters.Add("@NgayHetHan", SqlDbType.Date);
-                    _command.Parameters.Add("@Delay", SqlDbType.Time);
+                    _command.Parameters.Add("@Delay", SqlDbType.DateTime);
 
 
                     _command.Parameters["@MaThuoc"].Value = textBox1.Text;
@@ -61,6 +61,8 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
                     _command.ExecuteNonQuery();
                     MessageBox.Show("Thêm thuốc thành công");
                     this.Close();
+                    var form = new ThemXoaSuaThuocQTV();
+                    form.Show();
                 }
             }
             catch (SqlException ex)

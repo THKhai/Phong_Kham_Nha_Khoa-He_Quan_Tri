@@ -48,7 +48,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
                     _command.Parameters.Add("@ChiDinh", SqlDbType.NVarChar);
                     _command.Parameters.Add("@SoLuongTon", SqlDbType.Int);
                     _command.Parameters.Add("@NgayHetHan", SqlDbType.Date);
-                    _command.Parameters.Add("@Delay", SqlDbType.Time);
+                    _command.Parameters.Add("@Delay", SqlDbType.DateTime);
 
 
                     _command.Parameters["@MaThuoc"].Value = textBox1.Text;
