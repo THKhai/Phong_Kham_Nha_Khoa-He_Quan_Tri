@@ -31,13 +31,17 @@ begin transaction
 	from KhachHang
 commit transaction
 go
-create or alter procedure p_Read_CuocHenNhaSi
+create or alter procedure p_Read_CuocHenNhaSi @MaNhaSi varchar(10)
 as
 begin transaction
 	select*
 	from LichHen
+	where MaNhaSi = @MaNhaSi
 commit transaction
 go
+select*
+from LichHen
+where MaNhaSi = '02'
 -- Find 
 	-- find khách hàng
 create or alter procedure Tim_KH @MaBN varchar(10)
@@ -165,25 +169,28 @@ begin
     begin
         insert DonThuoc(DonThuoc, MaThuoc,SoLuong) values (@DonThuoc, @MaThuoc,@SoLuong)
     end
-    else
+    else if ((select SoLuong from DonThuoc t where t.DonThuoc = @DonThuoc and t.MaThuoc = @MaThuoc ) < @SoLuong)
     begin
-        raiserror (N'Đã tồn tại đơn thuốc này', 14, 1)
+        raiserror (N'Không đủ thuốc trong kho', 14, 1)
         set @ErrorOccurred = 1; -- Đánh dấu có lỗi
-        rollback
     end
-
+	else
+	begin
+		update DonThuoc set SoLuong = SoLuong + @SoLuong where DonThuoc = @DonThuoc and MaThuoc = @MaThuoc
+	end
     commit transaction
 end
 go
 
-Set transaction isolation level read uncommitted
+
 go
 -- Cap Số Lượng  Thuốc Tồn kho
 create or alter procedure CapNhat_SoLuong_Thuoc 
     @MaThuoc varchar(10), 
     @SoLuong int,
-	@TimeDelay time
+	@TimeDelay varchar(10)
 as
+Set transaction isolation level	Serializable
 begin transaction
     if ((select t.SoLuongTon from Thuoc t where t.MaThuoc = @MaThuoc) >= @SoLuong)
     begin
@@ -195,35 +202,27 @@ begin transaction
 		-- delay
 		waitfor delay @TimeDelay
 		-- tính toán
-		update THuoc set SoLuongTon = @Slg - @SoLuong
-
-		-- kiểm tra
-		select* 
-		from Thuoc t
-		where t.MaThuoc = @MaThuoc
-		commit transaction
+		update THuoc set SoLuongTon = @Slg - @SoLuong where MaThuoc = @MaThuoc
+		commit tran
     end
     else    
 	begin
         raiserror (N'Không Đủ Số Lượng Thuốc', 14, 1);
+		commit tran
     end
 go
-Set transaction isolation level read committed
+select* 
+from Thuoc t
+where t.MaThuoc = 'TH01'
+
+select*
+from HoSoBenhNhan
+where MaBN = '03'
 go
 
--- tinh phi
-create or alter procedure Tinh_Phi @MaBN varchar(10),@STT int
-as
-begin transaction
-	declare @phi float 
-	select @phi = Sum(t.DonViTinh * dt.SoLuong)
-	from DonThuoc dt, Thuoc t, HoSoBenhNhan hsbn
-	where dt.MaThuoc = t.MaThuoc and hsbn.DonThuoc = dt.DonThuoc
-	update HoSoBenhNhan set PhiKham = @phi where MaBN = @MaBN and STT = @STT
-	raiserror (N'Thêm Phi Thành Công',14,1)
-commit transaction
-go
-
+select *
+from HoSoBenhNhan
+where MaBN = '03'
 --Dang Ky Lich Hen
 CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
 AS

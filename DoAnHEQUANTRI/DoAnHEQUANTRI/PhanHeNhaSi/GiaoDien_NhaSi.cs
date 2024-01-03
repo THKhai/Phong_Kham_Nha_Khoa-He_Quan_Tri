@@ -31,6 +31,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         // LOAD FORM
         private void GiaoDien_NhaSi_Load(object sender, EventArgs e)
         {
+            label5.Text = MaNhaSi;
             textBox2.ReadOnly = true;   
         }
 
@@ -84,6 +85,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 using (SqlCommand command = new SqlCommand("p_Read_CuocHenNhaSi", _connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@MaNhaSi", MaNhaSi);
                     _connection.Open();
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {

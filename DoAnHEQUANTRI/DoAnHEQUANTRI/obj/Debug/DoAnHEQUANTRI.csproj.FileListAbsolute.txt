@@ -175,3 +175,6 @@ C:\Users\Dell\Downloads\Phong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUAN
 C:\Users\Dell\Downloads\Phong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.TinhTienNV.resources
 C:\Users\Dell\Downloads\Phong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhaSi.ThemCuocHen_NhaSi.resources
 C:\Users\Dell\Downloads\Phong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhaSi.UpdateCuocHenNhaSi.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.CapNhatThuocNV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.ThemLichHenNV.resources
+C:\Users\tranh\OneDrive\Desktop\APhong_Kham_Nha_Khoa-He_Quan_Tri\DoAnHEQUANTRI\DoAnHEQUANTRI\obj\Debug\DoAnHEQUANTRI.PhanHeNhanVien.TinhTienNV.resources

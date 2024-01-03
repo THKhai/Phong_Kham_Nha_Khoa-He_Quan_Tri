@@ -41,6 +41,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.ChinhSua = new System.Windows.Forms.Button();
             this.Đang_Xuat = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,11 +177,33 @@
             this.Đang_Xuat.UseVisualStyleBackColor = true;
             this.Đang_Xuat.Click += new System.EventHandler(this.Đang_Xuat_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(22, 114);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(88, 27);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Nha Sĩ: ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(116, 114);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 27);
+            this.label5.TabIndex = 16;
+            this.label5.Text = ".........";
+            // 
             // GiaoDien_NhaSi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 858);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.Đang_Xuat);
             this.Controls.Add(this.ChinhSua);
             this.Controls.Add(this.button6);
@@ -217,5 +241,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button ChinhSua;
         private System.Windows.Forms.Button Đang_Xuat;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

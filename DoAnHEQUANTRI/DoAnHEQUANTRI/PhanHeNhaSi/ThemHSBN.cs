@@ -151,20 +151,27 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
                         _connection.Open();
                         command.ExecuteNonQuery();
-
+                        DanhSachThuoc dst = new DanhSachThuoc(STT,current_MaBN,MaDT);
+                        this.Close();
+                        dst.ShowDialog();
                         // Retrieve the output parameter value after executing the stored procedure
                     }
                 }
             }
             catch (SqlException ex)
             {
-                // Xử lý lỗi từ thủ tục SQL
                 foreach (SqlError error in ex.Errors)
                 {
-                    Console.WriteLine($"Error {error.Number}: {error.Message}");
+                    if (error.Number == 2627)
+                    {
+                        // Duplicate key violation for DonThuoc
+                        MessageBox.Show("Lỗi: Mã hóa Đơn Đã Tồn Tại. Vui lòng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi: " + error.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-
-                // Bạn có thể thêm mã để quay lại trạng thái trước khi lỗi xảy ra hoặc thực hiện các hành động xử lý lỗi khác tại đây.
             }
             finally
             {
@@ -178,10 +185,6 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         private void button1_Click(object sender, EventArgs e)
         {
             addHSBN();
-            DanhSachThuoc dst = new DanhSachThuoc(STT,current_MaBN,MaDT);
-            this.Hide();
-            dst.ShowDialog();
-            this.Close();
         }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -191,6 +194,11 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             MaDT = textBox1.Text;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            phi = (int)numericUpDown1.Value;
         }
     }
 }
