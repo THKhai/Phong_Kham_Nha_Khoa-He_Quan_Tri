@@ -39,7 +39,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
                 {
                     _connection = new SqlConnection(_connectionString);
                     _connection.Open();
-                    String procname = "p_SuaThuoc";
+                    String procname = "p_SuaThuocFIX";
                     _command = new SqlCommand(procname);
                     _command.CommandType = CommandType.StoredProcedure;
                     _command.Connection = _connection;

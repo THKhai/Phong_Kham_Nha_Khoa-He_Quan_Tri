@@ -19,7 +19,7 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
             DataTable dt = new DataTable();
             SqlConnection myConn = new SqlConnection("Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False");
             myConn.Open();
-            SqlCommand myCmd = new SqlCommand("p_Xemdanhmucthuoc", myConn);
+            SqlCommand myCmd = new SqlCommand("p_XemdanhmucthuocFIX", myConn);
             myCmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(myCmd);
             da.Fill(dt);
