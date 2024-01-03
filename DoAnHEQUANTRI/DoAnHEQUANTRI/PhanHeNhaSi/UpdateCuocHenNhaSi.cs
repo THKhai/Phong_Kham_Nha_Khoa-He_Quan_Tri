@@ -83,5 +83,10 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         {
 
         }
+
+        private void UpdateCuocHenNhaSi_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

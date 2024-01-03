@@ -143,6 +143,7 @@
             this.Controls.Add(this.label1);
             this.Name = "UpdateCuocHenNhaSi";
             this.Text = "UpdateCuocHenNhaSi";
+            this.Load += new System.EventHandler(this.UpdateCuocHenNhaSi_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

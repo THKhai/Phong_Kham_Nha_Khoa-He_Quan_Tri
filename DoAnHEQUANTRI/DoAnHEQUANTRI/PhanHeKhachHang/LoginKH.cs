@@ -24,7 +24,7 @@ namespace DoAnHEQUANTRI
         public LoginKH()
         {
             InitializeComponent();
-            _connectionString = @"Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
+            _connectionString = @"Data Source=KHAINEHAHA;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False";
             delay = 0;
         }
         private void LoginKH_Load(object sender, EventArgs e)

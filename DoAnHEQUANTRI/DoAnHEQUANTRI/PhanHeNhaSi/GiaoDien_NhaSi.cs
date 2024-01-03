@@ -293,5 +293,33 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 LoadAllData_CuocHenNhaSi();
             }    
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            using (_connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("Xem_LH_Ngay", _connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@MaNhaSi",MaNhaSi);
+                    command.Parameters.Add("@Ngay", SqlDbType.Date).Value = dateTimePicker1.Value.Date;
+                    command.Parameters.AddWithValue("@TimeDelay", textBox1.Text);
+                    _connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        // Display the search result in the DataGridView
+                        dataGridView1.DataSource = dataTable;
+                    }
+                    _connection.Close();
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

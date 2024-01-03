@@ -31,19 +31,28 @@ begin transaction
 	from KhachHang
 commit transaction
 go
-create or alter procedure p_Read_CuocHenNhaSi @MaNhaSi varchar(10)
-as
-begin transaction
-	select*
-	from LichHen
-	where MaNhaSi = @MaNhaSi
-commit transaction
+
+-- read cuộc hẹn
+go
+
+go
+CREATE OR ALTER PROCEDURE p_Read_CuocHenNhaSi
+    @MaNhaSi VARCHAR(10)
+AS
+SET TRANSACTION ISOLATION LEVEL Serializable
+BEGIN TRANSACTION
+    SELECT *
+    FROM LichHen
+    WHERE MaNhaSi = @MaNhaSi
+
+COMMIT TRANSACTION
 go
 select*
 from LichHen
 where MaNhaSi = '02'
 -- Find 
 	-- find khách hàng
+go
 create or alter procedure Tim_KH @MaBN varchar(10)
 as
 begin transaction
@@ -93,29 +102,6 @@ print @p_res
 go
 
 
--- Thêm Hồ Sơ bệnh Nhân
-create or alter procedure Them_HSBN 
-	@MaBN varchar(10),
-	@STT int,
-	@Ngay_Kham date,
-	@MaNhaSi varchar(10),
-	@PhiKham float,
-	@DichVu nvarchar(MAX),
-	@DonThuoc varchar(10)
-as
-begin transaction
-	if(exists (select* from HoSoBenhNhan hsbn where hsbn.MaBN = @MaBN and hsbn.STT = @STT))
-	begin
-		raiserror (N'Đã tồn tại Hồ Sơ Bệnh Nhân này',14,1)
-		rollback
-	end
-	else
-	begin
-		insert HoSoBenhNhan(MaBN,STT,NgayKham,MaNhaSi,PhiKham,DichVu, DonThuoc)
-		values(@MaBN,@STT,@Ngay_Kham,@MaNhaSi,@PhiKham,@DichVu,@DonThuoc)
-	end
-commit transaction
-go
 -- Tìm Mã Bác Sĩ Theo tên
 create or alter procedure Tim_Ten_NhaSi @Ten nvarchar(MAX), @res varchar(10) output
 as
@@ -184,45 +170,11 @@ go
 
 
 go
--- Cap Số Lượng  Thuốc Tồn kho
-create or alter procedure CapNhat_SoLuong_Thuoc 
-    @MaThuoc varchar(10), 
-    @SoLuong int,
-	@TimeDelay varchar(10)
-as
-Set transaction isolation level	Serializable
-begin transaction
-    if ((select t.SoLuongTon from Thuoc t where t.MaThuoc = @MaThuoc) >= @SoLuong)
-    begin
-		-- lấy giá trị ra
-        declare @Slg int
-		select @Slg = t.SoLuongTon
-		from Thuoc t
-		where t.MaThuoc = @MaThuoc
-		-- delay
-		waitfor delay @TimeDelay
-		-- tính toán
-		update THuoc set SoLuongTon = @Slg - @SoLuong where MaThuoc = @MaThuoc
-		commit tran
-    end
-    else    
-	begin
-        raiserror (N'Không Đủ Số Lượng Thuốc', 14, 1);
-		commit tran
-    end
-go
-select* 
-from Thuoc t
-where t.MaThuoc = 'TH01'
-
-select*
-from HoSoBenhNhan
-where MaBN = '03'
-go
 
 select *
 from HoSoBenhNhan
 where MaBN = '03'
+go
 --Dang Ky Lich Hen
 CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
 AS
@@ -253,4 +205,101 @@ begin transaction
 	Begin
 		COMMIT TRANSACTION
 	END
+go
+
+
+
+-- có lỗi
+-- Cap Số Lượng  Thuốc Tồn kho -- Lost update and unrepeateable read
+create or alter procedure CapNhat_SoLuong_Thuoc 
+    @MaThuoc varchar(10), 
+    @SoLuong int,
+	@TimeDelay varchar(10)
+as
+Set transaction isolation level	Serializable
+begin transaction
+    if ((select t.SoLuongTon from Thuoc t where t.MaThuoc = @MaThuoc) >= @SoLuong)
+    begin
+		-- lấy giá trị ra
+        declare @Slg int
+		select @Slg = t.SoLuongTon
+		from Thuoc t
+		where t.MaThuoc = @MaThuoc
+		-- delay
+		waitfor delay @TimeDelay
+		-- tính toán
+		update THuoc set SoLuongTon = @Slg - @SoLuong where MaThuoc = @MaThuoc
+		commit tran
+    end
+    else    
+	begin
+        raiserror (N'Không Đủ Số Lượng Thuốc', 14, 1);
+		commit tran
+    end
+go
+--select* 
+--from Thuoc t
+--where t.MaThuoc = 'TH01'
+
+--select*
+--from HoSoBenhNhan
+--where MaBN = '03'
+--go
+
+-- Xem Cuộc Hẹn Theo Ngày -- PhanTom
+CREATE OR ALTER PROCEDURE Xem_LH_Ngay
+    @MaNhaSi VARCHAR(10),
+    @Ngay DATETIME,
+    @TimeDelay VARCHAR(10)
+AS
+Set transaction isolation level	serializable 
+BEGIN
+    BEGIN TRANSACTION;
+
+    DECLARE @res_table TABLE (
+        NgayGio DATETIME,
+        MaBN VARCHAR(10),
+        MaNhaSi VARCHAR(10),
+        NhaSiDat BIT
+    );
+
+    INSERT INTO @res_table
+    SELECT * FROM LichHen WHERE MaNhaSi = @MaNhaSi AND CONVERT(DATE, NgayGio) = CONVERT(DATE, @Ngay);
+
+    WAITFOR DELAY @TimeDelay;
+
+    SELECT * FROM @res_table;
+
+    COMMIT TRANSACTION;
+END;
+
+-- exec Xem_LH_Ngay '01','12/12/2023','00:00:00'
+go
+
+-- Thêm Hồ Sơ bệnh Nhân -- dirty read
+create or alter procedure Them_HSBN 
+	@MaBN varchar(10),
+	@STT int,
+	@Ngay_Kham date,
+	@MaNhaSi varchar(10),
+	@PhiKham float,
+	@DichVu nvarchar(MAX),
+	@DonThuoc varchar(10),
+	@TimeDelay varchar(10)
+as
+Set transaction isolation level	read committed
+begin transaction
+	waitfor delay @TimeDelay
+
+	if(exists (select* from HoSoBenhNhan hsbn where hsbn.MaBN = @MaBN and hsbn.STT = @STT))
+	begin
+		raiserror (N'SomThing wrong',14,1)
+		rollback
+	end
+	else
+	begin
+	insert HoSoBenhNhan(MaBN,STT,NgayKham,MaNhaSi,PhiKham,DichVu, DonThuoc)
+			values(@MaBN,@STT,@Ngay_Kham,@MaNhaSi,@PhiKham,@DichVu,@DonThuoc)
+	end
+commit transaction
 go

@@ -34,14 +34,14 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
             LoadCombobox_v2();
         }
         //FUNCTIONS
-            // Load
+        // Load
         private void LoadCombobox()
         {
             comboBox1.Items.Add("Chụp X-Quang");
             comboBox1.Items.Add("Trám Răng");
             comboBox1.Items.Add("Cạo râu");
         }
-            // load combobox
+        // load combobox
         private void LoadCombobox_v2()
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -89,7 +89,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                 }
             }
         }
-            // find MaNhSi
+        // find MaNhSi
         private void Find_MaNhaSi()
         {
             string TenNhaSi = comboBox2.Text;
@@ -101,16 +101,16 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@Ten", TenNhaSi);
-                        command.Parameters.Add("@res",SqlDbType.Char,10).Direction = ParameterDirection.Output;
+                        command.Parameters.Add("@res", SqlDbType.Char, 10).Direction = ParameterDirection.Output;
                         _connection.Open();
                         command.ExecuteNonQuery();
                         _connection.Close();
                         MaNhasSi = Convert.ToString(command.Parameters["@res"].Value);
-                        label4.Text = MaNhasSi; 
+                        label4.Text = MaNhasSi;
                     }
                 }
             }
-            
+
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -124,7 +124,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 
         private void ThemHSBN_Load(object sender, EventArgs e)
         {
-            Label_MaBN.Text =current_MaBN;
+            Label_MaBN.Text = current_MaBN;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -148,10 +148,13 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                         command.Parameters.Add("@PhiKham", SqlDbType.VarChar, 10).Value = phi;
                         command.Parameters.Add("@DichVu", SqlDbType.VarChar, 255).Value = Dich_Vu;
                         command.Parameters.Add("@DonThuoc", SqlDbType.VarChar, 255).Value = MaDT;
+                        command.Parameters.AddWithValue("@TimeDelay", textBox2.Text);
+                        
+
 
                         _connection.Open();
                         command.ExecuteNonQuery();
-                        DanhSachThuoc dst = new DanhSachThuoc(STT,current_MaBN,MaDT);
+                        DanhSachThuoc dst = new DanhSachThuoc(STT, current_MaBN, MaDT);
                         this.Close();
                         dst.ShowDialog();
                         // Retrieve the output parameter value after executing the stored procedure
@@ -199,6 +202,11 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             phi = (int)numericUpDown1.Value;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
