@@ -267,10 +267,10 @@ END;
 -- exec Xem_LH_Ngay '01','12/12/2023','00:00:00'
 go
 --CapNhatLichHen
-create or alter procedure CapNhatLichHenNS_FIX @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10)
+create or alter procedure CapNhatLichHenNS_FIX @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10),@NgayGio_Old date
 as
 begin transaction
-	update LichHen Set NgayGio = @NgayGio where @MaNhaSi = @MaNhaSi and MaBN = @MaBN 
+	update LichHen Set NgayGio = @NgayGio where MaNhaSi = @MaNhaSi and MaBN = @MaBN and NgayGio like @NgayGio_Old 
 	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MaBN AND LichHen.MaNhaSi = @MaNhaSi AND LichHen.NgayGio LIKE @NgayGio)
 	BEGIN
 		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
@@ -342,11 +342,11 @@ END;
 go
 
 --CapNhatLichHen-- dirty read
-create or alter procedure CapNhatLichHenNS @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10)
+create or alter procedure CapNhatLichHenNS @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10),@NgayGio_Old date
 as
 Set transaction isolation level	read uncommitted
 begin transaction
-	update LichHen Set NgayGio = @NgayGio where @MaNhaSi = @MaNhaSi and MaBN = @MaBN 
+	update LichHen Set NgayGio = @NgayGio where MaNhaSi = @MaNhaSi and MaBN = @MaBN and NgayGio like @NgayGio_Old 
 
 	waitfor delay '00:00:10'
 

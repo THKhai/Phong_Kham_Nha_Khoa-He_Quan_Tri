@@ -13,13 +13,15 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 {
     public partial class UpdateCuocHenNhaSi : Form
     {
+        string Ngay = null;
         string current_MaBN = null;
         string current_MaNhaSi = null;
         SqlConnection _connection = null;
         SqlCommand _command = null;
         string _connectionString = null;
-        public UpdateCuocHenNhaSi(string MaBN,string MaNhaSi)
+        public UpdateCuocHenNhaSi(string MaBN,string MaNhaSi, string Ngay_old)
         {
+            Ngay = Ngay_old;
             current_MaBN = MaBN;
             current_MaNhaSi= MaNhaSi;
             InitializeComponent();
@@ -41,6 +43,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                     command.Parameters.AddWithValue("@MaNhaSi", current_MaNhaSi);
                     command.Parameters.AddWithValue("@NgayGio", ThoiGian.Value);
                     command.Parameters.AddWithValue("@MaBN", current_MaBN);
+                    command.Parameters.AddWithValue("@NgayGio_Old", Ngay);
                     command.CommandType = CommandType.StoredProcedure;
 
                     try

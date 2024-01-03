@@ -16,6 +16,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
 {
     public partial class GiaoDien_NhaSi : Form
     {
+        string Ngay = null;
         string MaNhaSi = null;
         string status = null;
         string MaBN_pick = null;
@@ -199,6 +200,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
             {
                 label3.Text = selectedRow.Cells["MaBN"].Value.ToString();
                 MaBN_pick = label3.Text;
+                Ngay = selectedRow.Cells["NgayGio"].Value.ToString();
             }
             else
             {
@@ -286,7 +288,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         {
             if(status == "CuocHen")
             {
-                UpdateCuocHenNhaSi udchns =new UpdateCuocHenNhaSi(MaBN_pick,MaNhaSi);
+                UpdateCuocHenNhaSi udchns =new UpdateCuocHenNhaSi(MaBN_pick,MaNhaSi,Ngay);
                 this.Hide();
                 udchns.ShowDialog();
                 this.Show();
