@@ -42,7 +42,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
             status = "BenhNhan";
             using (_connection = new SqlConnection(_connectionString))
             {
-                using (SqlCommand command = new SqlCommand("p_Read_BenhNhan", _connection))
+                using (SqlCommand command = new SqlCommand("p_Read_BenhNhan_FIX", _connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     _connection.Open();

@@ -287,3 +287,11 @@ begin transaction
 	from KhachHang
 commit transaction
 go
+create or alter procedure p_Read_BenhNhan_FIX
+as
+Set transaction isolation level	read committed
+begin transaction
+	select*
+	from KhachHang
+commit transaction
+go
