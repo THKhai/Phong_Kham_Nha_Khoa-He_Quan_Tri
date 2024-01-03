@@ -17,9 +17,9 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
         {
             InitializeComponent();
             DataTable dt = new DataTable();
-            SqlConnection myConn = new SqlConnection("Data Source=SPUTNIK-I;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False");
+            SqlConnection myConn = new SqlConnection("Data Source=DESKTOP-OB2NBQU;Initial Catalog=QuanLyPhongKhamNhaKhoa_HQT;Integrated Security=True;Encrypt=False");
             myConn.Open();
-            SqlCommand myCmd = new SqlCommand("p_Xemdanhmucthuoc", myConn);
+            SqlCommand myCmd = new SqlCommand("p_XemdanhmucthuocFIX", myConn);
             myCmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(myCmd);
             da.Fill(dt);

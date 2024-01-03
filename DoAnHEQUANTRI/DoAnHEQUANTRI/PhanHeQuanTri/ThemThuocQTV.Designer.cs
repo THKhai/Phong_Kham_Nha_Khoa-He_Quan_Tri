@@ -170,6 +170,7 @@
             this.dateTimePicker2.ShowUpDown = true;
             this.dateTimePicker2.Size = new System.Drawing.Size(494, 22);
             this.dateTimePicker2.TabIndex = 24;
+            this.dateTimePicker2.Value = new System.DateTime(2024, 1, 3, 0, 0, 0, 0);
             // 
             // button2
             // 

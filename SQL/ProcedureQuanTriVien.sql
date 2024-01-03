@@ -1,7 +1,5 @@
 ﻿use QuanLyPhongKhamNhaKhoa_HQT
 
-/*delete from DonThuoc
-delete from Thuoc*/
 go
 CREATE OR ALTER PROCEDURE p_KtraTKQTV @MAQTV VARCHAR(20), @MATKHAU NVARCHAR(255),
 @OK BIT OUT
@@ -16,25 +14,33 @@ BEGIN TRANSACTION
 	SET @OK = 0
 	END
 COMMIT TRANSACTION
---XEM DANH MUC THUOC Phantom Read
+
+
+
+--Xem danh muc thuoc DIRTY READ
 go
 CREATE OR ALTER PROCEDURE p_Xemdanhmucthuoc
 AS
-SET TRANSACTION ISOLATION LEVEL	READ UNCOMMITTED
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 BEGIN TRANSACTION
 	SELECT *
 	FROM Thuoc
 COMMIT TRANSACTION
 
---XEM DANH MUC THUOC Phantom Read FIX
+
+
+--Xem danh muc thuoc DIRTY READ FIX
 go
-CREATE OR ALTER PROCEDURE p_XemdanhmucthuocFIX
+CREATE OR ALTER PROCEDURE p_Xemdanhmucthuoc
 AS
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+--SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 BEGIN TRANSACTION
 	SELECT *
 	FROM Thuoc
 COMMIT TRANSACTION
+
+
+
 --Them thuoc
 go
 CREATE OR ALTER PROCEDURE p_ThemThuoc
@@ -44,7 +50,7 @@ CREATE OR ALTER PROCEDURE p_ThemThuoc
     @ChiDinh NVARCHAR(MAX),
     @SoLuongTon INT,
     @NgayHetHan DATE,
-	@Delay TIME
+	@Delay DATETIME
 AS
 BEGIN TRANSACTION
 	IF EXISTS(SELECT * FROM Thuoc WHERE @MaThuoc = MaThuoc)
@@ -56,9 +62,16 @@ BEGIN TRANSACTION
 	BEGIN
 		INSERT INTO Thuoc(MaThuoc, TenThuoc, DonViTinh, ChiDinh, SoLuongTon, NgayHetHan)
 		VALUES (@MaThuoc, @TenThuoc, @DonViTinh, @ChiDinh, @SoLuongTon, @NgayHetHan);
-		--WAITFOR DELAY '00:00:10'
+		WAITFOR DELAY @Delay
+		IF @SoLuongTon < 0
+		BEGIN
+			RAISERROR(N'Số lượng tồn không được nhỏ hơn 0',14,1)
+			ROLLBACK
+		END
 	END
 COMMIT TRANSACTION
+
+
 
 --Xoa thuoc
 go
@@ -67,7 +80,6 @@ CREATE OR ALTER PROCEDURE p_XoaThuoc
 	@Delay TIME
 AS
 BEGIN TRANSACTION
-	--WAITFOR DELAY '00:00:10'
 	IF NOT EXISTS(SELECT * FROM Thuoc WHERE @MaThuoc = MaThuoc)
 	BEGIN
 		RAISERROR(N'Mã thuốc không tồn tại',14,1)
@@ -78,11 +90,11 @@ BEGIN TRANSACTION
 		DELETE Thuoc
 		WHERE MaThuoc = @MaThuoc
 	END
-	BEGIN
-		COMMIT TRANSACTION
-	END
+COMMIT TRANSACTION
 
---Sua thuoc Lost Update
+
+
+--Sua thuoc LOST UPDATE
 go
 CREATE OR ALTER PROCEDURE p_SuaThuoc
 	@MaThuocCu VARCHAR(10),
@@ -108,7 +120,10 @@ BEGIN TRANSACTION
 		WHERE MaThuoc = @MaThuocCu
 	END
 COMMIT TRANSACTION
---Sua thuoc Lost Update FIX
+
+
+
+--Sua thuoc LOST UPDATE FIX
 go
 CREATE OR ALTER PROCEDURE p_SuaThuocFIX
 	@MaThuocCu VARCHAR(10),
@@ -136,7 +151,8 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 
 
---xem thuoc da het han
+
+--Xem thuoc da het han
 go
 CREATE OR ALTER PROCEDURE p_Xemthuocdahethan
 AS
@@ -147,8 +163,9 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 go
 
---dang ky tai khoan nhan vien
 
+
+--Dang ky tai khoan nhan vien
 CREATE OR ALTER PROCEDURE p_DangKyTKNV @MaNV varchar(10), @HoTen NVARCHAR(255), @MatKhau NVARCHAR(255)
 AS
 BEGIN TRANSACTION
@@ -161,12 +178,11 @@ BEGIN TRANSACTION
 	BEGIN
 		INSERT INTO NhanVien VALUES (@MaNV,@HoTen,@MatKhau) 
 	END
-		--WAITFOR DELAY '00:00:10'
-	BEGIN
-		COMMIT TRANSACTION
-	END
---dang ky tai khoan nha si
---, @Lichlam NVARCHAR(MAX)
+COMMIT TRANSACTION
+
+
+
+--Dang ky tai khoan nha si
 GO
 CREATE OR ALTER PROCEDURE p_DangKyTKNS @MaNS varchar(10), @HoTen NVARCHAR(255), @SoDienThoai NVARCHAR(20), @MatKhau NVARCHAR(255), @Ban BIT
 AS
@@ -180,13 +196,11 @@ BEGIN TRANSACTION
 	BEGIN
 		INSERT INTO NhaSi(MaNhaSi, HoTen, SoDienThoai, MatKhau, Ban) VALUES (@MaNS,@HoTen,@SoDienThoai,@MatKhau,0) 
 	END
-	BEGIN
-		COMMIT TRANSACTION
-	END
+COMMIT TRANSACTION
 
---khoa tai khoan nhan vien
 
---danh sach tai khoan nha si da ban
+
+--Danh sach tai khoan nha si da ban
 go
 CREATE OR ALTER PROCEDURE p_DanhsachTKNSdaban
 AS
@@ -195,7 +209,7 @@ BEGIN TRANSACTION
 	FROM NhaSi
 	WHERE Ban = 1
 COMMIT TRANSACTION
----danh sach tai khoan khach hang da ban 
+---Danh sach tai khoan khach hang da ban 
 go
 CREATE OR ALTER PROCEDURE p_DanhsachTKKHdaban
 AS
@@ -204,7 +218,10 @@ BEGIN TRANSACTION
 	FROM KhachHang
 	WHERE Ban = 1
 COMMIT TRANSACTION
--- khoa tai khoan nha si
+
+
+
+--Khoa tai khoan nha si
 
 GO
 CREATE OR ALTER PROCEDURE p_BanTKNS @MaNS varchar(10)
@@ -227,11 +244,11 @@ BEGIN TRANSACTION
 		SET Ban = 1
 		WHERE MaNhaSi = @MaNS
 	END
-	BEGIN
-		COMMIT TRANSACTION
-	END
+COMMIT TRANSACTION
 
---khoa tai khoan khach hang
+
+
+--Khoa tai khoan khach hang
 GO
 CREATE OR ALTER PROCEDURE p_BanTKKH @MAKH varchar(10)
 AS
@@ -253,11 +270,11 @@ BEGIN TRANSACTION
 		SET Ban = 1
 		WHERE MaBN = @MAKH
 	END
-	BEGIN
-		COMMIT TRANSACTION
-	END
+COMMIT TRANSACTION
 
---mo khoa tai khoan nha si
+
+
+--Mo khoa tai khoan nha si
 GO
 CREATE OR ALTER PROCEDURE p_UnbanTKNS @MaNS varchar(10)
 AS
@@ -279,11 +296,11 @@ BEGIN TRANSACTION
 		SET Ban = 0
 		WHERE MaNhaSi = @MaNS
 	END
-	BEGIN
-		COMMIT TRANSACTION
-	END
+COMMIT TRANSACTION
 
---mo khoa tai khoan khach hang
+
+
+--Mo khoa tai khoan khach hang
 GO
 CREATE OR ALTER PROCEDURE p_UnbanTKKH @MaKH varchar(10)
 AS
@@ -305,14 +322,4 @@ BEGIN TRANSACTION
 		SET Ban = 0
 		WHERE MaBN = @MaKH
 	END
-	BEGIN
-		COMMIT TRANSACTION
-	END
-
-/*DKTKMoiQTV
-DKTKNVMoiQTV
-DKTKNSMoiQTV
-
-KhoaTKQTV
-KhoaTKNSQTV
-KhoaTKKHQTV*/
+COMMIT TRANSACTION
