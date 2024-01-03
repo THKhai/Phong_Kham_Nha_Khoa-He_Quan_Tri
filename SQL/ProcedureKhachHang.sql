@@ -69,7 +69,6 @@ GO
 CREATE OR ALTER PROCEDURE p_DangKyLichHenKH @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
 AS
 BEGIN TRANSACTION
-update LichHen set NgayGio = @NGAYGIO where MaBN = @MABN and MaNhaSi = MaNhaSi
 	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
 	BEGIN
 		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
@@ -77,6 +76,7 @@ update LichHen set NgayGio = @NGAYGIO where MaBN = @MABN and MaNhaSi = MaNhaSi
 	END
 	ElSE
 	Begin
+		INSERT INTO LichHen VALUES(@NGAYGIO,@MABN,@MANHASI,0)
 		COMMIT TRANSACTION
 	END
 
