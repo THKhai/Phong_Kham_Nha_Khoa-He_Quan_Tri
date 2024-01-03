@@ -9,13 +9,6 @@ begin transaction
 	from HoSoBenhNhan
 commit transaction
 go
-create or alter procedure p_Read_BenhNhan
-as
-begin transaction
-	select*
-	from KhachHang
-commit transaction
-go
 
 
 CREATE OR ALTER PROCEDURE p_Read_CuocHenNhaSi
@@ -214,14 +207,10 @@ begin transaction
 		commit tran
     end
 go
-CREATE OR ALTER PROCEDURE p_DangKyLichHenNS_FIX @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
+CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
 AS
-Set transaction isolation level	read committed
 BEGIN TRANSACTION
 	INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
-
-	waitfor delay '00:00:10'
-
 	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
 	BEGIN
 		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
@@ -263,28 +252,11 @@ begin transaction
     end
 go
 
---Dang Ky Lich Hen-- dirty read
-CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
-AS
-Set transaction isolation level	read uncommitted
-BEGIN TRANSACTION
-	INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
 
-	waitfor delay '00:00:10'
-
-	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
-	BEGIN
-		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
-		ROLLBACK
-	END
-	ElSE
-	Begin
-		COMMIT TRANSACTION
-	END
-GO
 -- dirty read
 CREATE OR ALTER PROCEDURE p_DangKyTKKH_Error @MABN varchar(10), @HoTen NVARCHAR(255), @NgaySinh DATE, @DiaChi NVARCHAR(255),@SoDienThoai NVARCHAR(20), @MatKhau NVARCHAR(255)
 AS
+Set transaction isolation level	read uncommitted
 BEGIN TRANSACTION
 	IF EXISTS (SELECT * FROM KhachHang WHERE KhachHang.MaBN = @MABN) 
 	BEGIN
@@ -307,3 +279,11 @@ BEGIN TRANSACTION
 	END
 
 GO
+create or alter procedure p_Read_BenhNhan
+as
+Set transaction isolation level	read uncommitted
+begin transaction
+	select*
+	from KhachHang
+commit transaction
+go
