@@ -305,7 +305,6 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNhaSi",MaNhaSi);
                     command.Parameters.Add("@Ngay", SqlDbType.Date).Value = dateTimePicker1.Value.Date;
-                    command.Parameters.AddWithValue("@TimeDelay", textBox1.Text);
                     _connection.Open();
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {

@@ -45,7 +45,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
                     {
                         _connection = new SqlConnection(_connectionString);
                         _connection.Open();
-                        string proc = "p_DangKyLichHenNS";
+                        string proc = "p_DangKyLichHenNS_FIX";
                         _command = new SqlCommand(proc);
                         _command.CommandType = CommandType.StoredProcedure;
                         _command.Connection = _connection;

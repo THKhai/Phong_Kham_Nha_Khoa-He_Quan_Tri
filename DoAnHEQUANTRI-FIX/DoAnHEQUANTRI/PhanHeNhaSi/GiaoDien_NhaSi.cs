@@ -298,7 +298,7 @@ namespace DoAnHEQUANTRI.PhanHeNhaSi
         {
             using (_connection = new SqlConnection(_connectionString))
             {
-                using (SqlCommand command = new SqlCommand("Xem_LH_Ngay_FIX", _connection))
+                using (SqlCommand command = new SqlCommand("Xem_LH_Ngay", _connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNhaSi",MaNhaSi);

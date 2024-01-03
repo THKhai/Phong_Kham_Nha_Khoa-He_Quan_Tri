@@ -1,21 +1,6 @@
 ﻿use QuanLyPhongKhamNhaKhoa_HQT
 go	
 
-CREATE OR ALTER PROCEDURE p_KtraTKNS @MANS VARCHAR(20), @MATKHAU NVARCHAR(255),
-@OK BIT OUT
-AS
-BEGIN TRANSACTION
-	IF EXISTS(SELECT * FROM NhaSi WHERE @MANS = NhaSi.MaNhaSi AND @MATKHAU = NhaSi.MatKhau AND NhaSi.Ban = 0)
-	BEGIN
-	SET @OK = 1
-	END
-	ELSE
-	BEGIN
-	SET @OK = 0
-	END
-COMMIT TRANSACTION
-go
-
 -- read table
 create or alter procedure p_Read_HoSoBenhNhan
 as
@@ -32,19 +17,14 @@ begin transaction
 commit transaction
 go
 
--- read cuộc hẹn
-go
 
-go
 CREATE OR ALTER PROCEDURE p_Read_CuocHenNhaSi
     @MaNhaSi VARCHAR(10)
 AS
-SET TRANSACTION ISOLATION LEVEL Serializable
 BEGIN TRANSACTION
     SELECT *
     FROM LichHen
     WHERE MaNhaSi = @MaNhaSi
-
 COMMIT TRANSACTION
 go
 --select*
@@ -95,19 +75,17 @@ begin transaction
 		raiserror (N'Không tồn tại Hồ Sơ Bệnh Nhân',14,1)
 commit transaction
 go
-declare @p_res int
-exec Take_NewSTT '02',@p_res
-print @p_res
+--declare @p_res int
+--exec Take_NewSTT '02',@p_res
+--print @p_res
 -- Lấy Don Thuoc Tiep Theo
 go
-
 
 -- Tìm Mã Bác Sĩ Theo tên
 create or alter procedure Tim_Ten_NhaSi @Ten nvarchar(MAX), @res varchar(10) output
 as
 begin transaction
 	select @res = MaNhaSi from NhaSi where HoTen = @Ten
-	print @res
 commit transaction
 go
 
@@ -139,6 +117,10 @@ begin
 end
 go
 
+--select *
+--from HoSoBenhNhan
+--where MaBN = '03'
+--go
 -- Tạo Đơn Thuốc
 create or alter procedure ThemDonThuoc 
     @DonThuoc varchar(10), 
@@ -148,9 +130,8 @@ create or alter procedure ThemDonThuoc
 as
 begin
     begin transaction
-
+	update DonThuoc set SoLuong = SoLuong + @SoLuong where DonThuoc = @DonThuoc and MaThuoc = @MaThuoc
     set @ErrorOccurred = 0; -- Mặc định không có lỗi
-
     if (not exists (select * from DonThuoc t where t.DonThuoc = @DonThuoc and t.MaThuoc = @MaThuoc))
     begin
         insert DonThuoc(DonThuoc, MaThuoc,SoLuong) values (@DonThuoc, @MaThuoc,@SoLuong)
@@ -158,40 +139,12 @@ begin
     else if ((select SoLuong from DonThuoc t where t.DonThuoc = @DonThuoc and t.MaThuoc = @MaThuoc ) < @SoLuong)
     begin
         raiserror (N'Không đủ thuốc trong kho', 14, 1)
-        set @ErrorOccurred = 1; -- Đánh dấu có lỗi
+        set @ErrorOccurred = 1; -- Đánh dấu có 
+		rollback
     end
-	else
-	begin
-		update DonThuoc set SoLuong = SoLuong + @SoLuong where DonThuoc = @DonThuoc and MaThuoc = @MaThuoc
-	end
     commit transaction
 end
 go
-
-
-go
-
---select *
---from HoSoBenhNhan
---where MaBN = '03'
---go
---Dang Ky Lich Hen
-CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
-AS
-BEGIN TRANSACTION
-INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
-	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
-	BEGIN
-		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
-		ROLLBACK
-	END
-	ElSE
-	Begin
-		COMMIT TRANSACTION
-	END
-GO
-
-
 create or alter procedure Them_HSBN 
 	@MaBN varchar(10),
 	@STT int,
@@ -205,7 +158,6 @@ begin transaction
 	if(exists (select* from HoSoBenhNhan hsbn where hsbn.MaBN = @MaBN and hsbn.STT = @STT))
 	begin
 		raiserror (N'Đã Tồn Tại Hóa Đơn',14,1)
-		rollback
 	end
 	else
 	begin
@@ -213,6 +165,30 @@ begin transaction
 			values(@MaBN,@STT,@Ngay_Kham,@MaNhaSi,@PhiKham,@DichVu,@DonThuoc)
 	end
 commit transaction
+go
+CREATE OR ALTER PROCEDURE Xem_LH_Ngay
+    @MaNhaSi VARCHAR(10),
+    @Ngay DATETIME
+AS
+BEGIN TRANSACTION
+	select*
+	from LichHen lh
+	where lh.MaNhaSi = @MaNhaSi and NgayGio = @Ngay
+COMMIT TRANSACTION
+go
+create or alter procedure CapNhatLichHenNS @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10),@NgayGio_Old date
+as
+begin transaction
+	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MaBN AND LichHen.MaNhaSi = @MaNhaSi AND LichHen.NgayGio = @NgayGio)
+	BEGIN
+		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
+		ROLLBACK
+	END
+	ElSE
+	Begin
+		update LichHen Set NgayGio = @NgayGio where MaNhaSi = @MaNhaSi and MaBN = @MaBN and NgayGio = @NgayGio_Old 
+		COMMIT TRANSACTION
+	END
 go
 -------------
 create or alter procedure CapNhat_SoLuong_Thuoc_FIX 
@@ -238,40 +214,15 @@ begin transaction
 		commit tran
     end
 go
-
-CREATE OR ALTER PROCEDURE Xem_LH_Ngay_FIX
-    @MaNhaSi VARCHAR(10),
-    @Ngay DATETIME
-
+CREATE OR ALTER PROCEDURE p_DangKyLichHenNS_FIX @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
 AS
-Set transaction isolation level	serializable
-BEGIN
-    BEGIN TRANSACTION;
+Set transaction isolation level	read committed
+BEGIN TRANSACTION
+	INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
 
-    DECLARE @res_table TABLE (
-        NgayGio DATETIME,
-        MaBN VARCHAR(10),
-        MaNhaSi VARCHAR(10),
-        NhaSiDat BIT
-    );
+	waitfor delay '00:00:10'
 
-    INSERT INTO @res_table
-    SELECT * FROM LichHen WHERE MaNhaSi = @MaNhaSi AND CONVERT(DATE, NgayGio) = CONVERT(DATE, @Ngay);
-
-
-    SELECT * FROM @res_table;
-
-    COMMIT TRANSACTION;
-END;
-
--- exec Xem_LH_Ngay '01','12/12/2023','00:00:00'
-go
---CapNhatLichHen
-create or alter procedure CapNhatLichHenNS_FIX @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10),@NgayGio_Old date
-as
-begin transaction
-	update LichHen Set NgayGio = @NgayGio where MaNhaSi = @MaNhaSi and MaBN = @MaBN and NgayGio like @NgayGio_Old 
-	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MaBN AND LichHen.MaNhaSi = @MaNhaSi AND LichHen.NgayGio LIKE @NgayGio)
+	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
 	BEGIN
 		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
 		ROLLBACK
@@ -280,8 +231,7 @@ begin transaction
 	Begin
 		COMMIT TRANSACTION
 	END
-go
-
+GO
 
 -------------
 -- có lỗi
@@ -312,45 +262,17 @@ begin transaction
 		commit tran
     end
 go
--- phantom
-CREATE OR ALTER PROCEDURE Xem_LH_Ngay
-    @MaNhaSi VARCHAR(10),
-    @Ngay DATETIME,
-	@TimeDelay varchar(10)
+
+--Dang Ky Lich Hen-- dirty read
+CREATE OR ALTER PROCEDURE p_DangKyLichHenNS @NGAYGIO DATETIME, @MABN VARCHAR(10), @MANHASI VARCHAR(10)
 AS
 Set transaction isolation level	read uncommitted
-BEGIN
-    BEGIN TRANSACTION;
-
-    DECLARE @res_table TABLE (
-        NgayGio DATETIME,
-        MaBN VARCHAR(10),
-        MaNhaSi VARCHAR(10),
-        NhaSiDat BIT
-    );
-    INSERT INTO @res_table
-    SELECT * FROM LichHen WHERE MaNhaSi = @MaNhaSi AND CONVERT(DATE, NgayGio) = CONVERT(DATE, @Ngay);
-
-    WAITFOR DELAY @TimeDelay;
-
-    SELECT * FROM @res_table;
-
-    COMMIT TRANSACTION;
-END;
-
--- exec Xem_LH_Ngay '01','12/12/2023','00:00:00'
-go
-
---CapNhatLichHen-- dirty read
-create or alter procedure CapNhatLichHenNS @MaNhaSi varchar(10),@NgayGio date,@MaBN varchar(10),@NgayGio_Old date
-as
-Set transaction isolation level	read uncommitted
-begin transaction
-	update LichHen Set NgayGio = @NgayGio where MaNhaSi = @MaNhaSi and MaBN = @MaBN and NgayGio like @NgayGio_Old 
+BEGIN TRANSACTION
+	INSERT INTO LichHen VALUES (@NGAYGIO,@MABN,@MANHASI,1)
 
 	waitfor delay '00:00:10'
 
-	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MaBN AND LichHen.MaNhaSi = @MaNhaSi AND LichHen.NgayGio LIKE @NgayGio)
+	IF EXISTS (SELECT * FROM LichHen WHERE LichHen.MaBN <> @MABN AND LichHen.MaNhaSi = @MANHASI AND LichHen.NgayGio LIKE @NGAYGIO)
 	BEGIN
 		RAISERROR(N'Lịch hẹn đặt đã bị trùng giờ với một lịch hẹn khác',14,1)
 		ROLLBACK
@@ -359,4 +281,29 @@ begin transaction
 	Begin
 		COMMIT TRANSACTION
 	END
-go
+GO
+-- dirty read
+CREATE OR ALTER PROCEDURE p_DangKyTKKH_Error @MABN varchar(10), @HoTen NVARCHAR(255), @NgaySinh DATE, @DiaChi NVARCHAR(255),@SoDienThoai NVARCHAR(20), @MatKhau NVARCHAR(255)
+AS
+BEGIN TRANSACTION
+	IF EXISTS (SELECT * FROM KhachHang WHERE KhachHang.MaBN = @MABN) 
+	BEGIN
+		RAISERROR(N'Mã Bệnh Nhân đã tồn tại',14,1)
+		ROLLBACK
+	END
+	ELSE
+	BEGIN
+		INSERT INTO KhachHang VALUES (@MABN,@HoTen,@NgaySinh,@DiaChi,@SoDienThoai,@MatKhau,0) 
+		waitfor delay '00:00:10'
+		IF EXISTS (SELECT * FROM KhachHang WHERE KhachHang.SoDienThoai = @SoDienThoai AND KhachHang.MaBN <> @MABN)
+		BEGIN
+			RAISERROR(N'Không được đặt trùng số điện thoại',14,1)
+			ROLLBACK
+		END
+		ELSE
+		BEGIN
+			COMMIT TRANSACTION
+		END
+	END
+
+GO

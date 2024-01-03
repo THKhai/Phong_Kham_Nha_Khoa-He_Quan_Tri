@@ -77,5 +77,11 @@ namespace DoAnHEQUANTRI.PhanHeQuanTri
             form.Show();
             Hide();
         }
+
+        private void ThemThuocQTV_Load(object sender, EventArgs e)
+        {
+
+
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace DoAnHEQUANTRI
                 {
                     _connection = new SqlConnection(_connectionString);
                     _connection.Open();
-                    String procname = "p_DangKyTKKH";
+                    String procname = "p_DangKyTKKH_Error";
                     _command = new SqlCommand(procname);
                     _command.CommandType = CommandType.StoredProcedure;
                     _command.Connection = _connection;
