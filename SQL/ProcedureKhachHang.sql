@@ -53,6 +53,7 @@ BEGIN TRANSACTION
 	ELSE
 	BEGIN
 		INSERT INTO KhachHang VALUES (@MABN,@HoTen,@NgaySinh,@DiaChi,@SoDienThoai,@MatKhau,0) 
+		waitfor delay '00:00:10'
 		IF EXISTS (SELECT * FROM KhachHang WHERE KhachHang.SoDienThoai = @SoDienThoai AND KhachHang.MaBN <> @MABN)
 		BEGIN
 			RAISERROR(N'Không được đặt trùng số điện thoại',14,1)
